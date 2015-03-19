@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<language isocode="en" pk="8796093055008" uri="http://www.cloudelectronics.com/ws410/rest/languages/en">
+  <comments/>
+  <creationtime>2014-01-21T13:23:28.620Z</creationtime>
+  <modifiedtime>2014-01-21T13:25:32.305Z</modifiedtime>
+  <active>true</active>
+  <name>English</name>
+  <baseStores>
+    <baseStore uid="demo" pk="8796093056989" uri="http://www.cloudelectronics.com/ws410/rest/basestores/demo">
+      <customerAllowedToIgnoreSuggestions>false</customerAllowedToIgnoreSuggestions>
+      <net>false</net>
+    </baseStore>
+  </baseStores>
+  <facetSearchConfigs>
+    <solrFacetSearchConfig name="demoIndex" pk="8796093057176" uri="http://www.cloudelectronics.com/ws410/rest/solrfacetsearchconfigs/demoIndex">
+      <enabledLanguageFallbackMechanism>false</enabledLanguageFallbackMechanism>
+    </solrFacetSearchConfig>
+  </facetSearchConfigs>
+  <fallbackLanguages/>
+  <StopWords/>
+  <synonyms/>
+</language>

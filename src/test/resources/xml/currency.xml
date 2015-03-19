@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<currency isocode="EUR" pk="8796125823009" uri="http://www.cloudelectronics.com/ws410/rest/currencies/EUR">
+  <comments/>
+  <creationtime>2014-01-10T12:58:23.556Z</creationtime>
+  <modifiedtime>2014-01-10T13:00:09.650Z</modifiedtime>
+  <active>true</active>
+  <name>Euro</name>
+  <base>true</base>
+  <baseStores/>
+  <conversion>1.0</conversion>
+  <digits>2</digits>
+  <facetSearchConfigs>
+    <solrFacetSearchConfig name="demoIndex" pk="8796093057176" uri="http://www.cloudelectronics.com/ws410/rest/solrfacetsearchconfigs/demoIndex">
+      <enabledLanguageFallbackMechanism>false</enabledLanguageFallbackMechanism>
+    </solrFacetSearchConfig>
+  </facetSearchConfigs>
+  <symbol>€</symbol>
+</currency>

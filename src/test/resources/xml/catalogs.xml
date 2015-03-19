@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<catalogs uri="http://37.153.99.110:9001/ws410/rest/catalogs/">
+	<catalog id="Default" pk="8796093055576"
+		uri="http://37.153.99.110:9001/ws410/rest/catalogs/Default" />
+	<catalog id="electronicsProductCatalog" pk="8796093088344"
+		uri="http://37.153.99.110:9001/ws410/rest/catalogs/electronicsProductCatalog" />
+	<catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:type="contentCatalogDTO" id="electronicsContentCatalog" pk="8796093153880"
+		uri="http://37.153.99.110:9001/ws410/rest/contentcatalogs/electronicsContentCatalog" />
+	<catalog id="apparelProductCatalog" pk="8796093186648"
+		uri="http://37.153.99.110:9001/ws410/rest/catalogs/apparelProductCatalog" />
+	<catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:type="contentCatalogDTO" id="apparel-ukContentCatalog" pk="8796093219416"
+		uri="http://37.153.99.110:9001/ws410/rest/contentcatalogs/apparel-ukContentCatalog" />
+	<catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:type="contentCatalogDTO" id="apparel-deContentCatalog" pk="8796093252184"
+		uri="http://37.153.99.110:9001/ws410/rest/contentcatalogs/apparel-deContentCatalog" />
+	<catalog id="demoProductCatalog" pk="8796093284952"
+		uri="http://37.153.99.110:9001/ws410/rest/catalogs/demoProductCatalog" />
+	<catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:type="contentCatalogDTO" id="demoContentCatalog" pk="8796093317720"
+		uri="http://37.153.99.110:9001/ws410/rest/contentcatalogs/demoContentCatalog" />
+	<catalog id="electronicsProductCatalog" pk="8796093088344"
+		uri="http://37.153.99.110:9001/ws410/rest/catalogs/electronicsProductCatalog" />
+	<catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:type="contentCatalogDTO" id="electronicsContentCatalog" pk="8796093153880"
+		uri="http://37.153.99.110:9001/ws410/rest/contentcatalogs/electronicsContentCatalog" />
+	<catalog id="apparelProductCatalog" pk="8796093186648"
+		uri="http://37.153.99.110:9001/ws410/rest/catalogs/apparelProductCatalog" />
+	<catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:type="contentCatalogDTO" id="apparel-ukContentCatalog" pk="8796093219416"
+		uri="http://37.153.99.110:9001/ws410/rest/contentcatalogs/apparel-ukContentCatalog" />
+	<catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:type="contentCatalogDTO" id="apparel-deContentCatalog" pk="8796093252184"
+		uri="http://37.153.99.110:9001/ws410/rest/contentcatalogs/apparel-deContentCatalog" />
+	<catalog id="demoProductCatalog" pk="8796093284952"
+		uri="http://37.153.99.110:9001/ws410/rest/catalogs/demoProductCatalog" />
+	<catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:type="contentCatalogDTO" id="demoContentCatalog" pk="8796093317720"
+		uri="http://37.153.99.110:9001/ws410/rest/contentcatalogs/demoContentCatalog" />
+	<catalog id="electronicsProductCatalog" pk="8796093088344"
+		uri="http://37.153.99.110:9001/ws410/rest/catalogs/electronicsProductCatalog" />
+	<catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:type="contentCatalogDTO" id="electronicsContentCatalog" pk="8796093153880"
+		uri="http://37.153.99.110:9001/ws410/rest/contentcatalogs/electronicsContentCatalog" />
+	<catalog id="apparelProductCatalog" pk="8796093186648"
+		uri="http://37.153.99.110:9001/ws410/rest/catalogs/apparelProductCatalog" />
+	<catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:type="contentCatalogDTO" id="apparel-ukContentCatalog" pk="8796093219416"
+		uri="http://37.153.99.110:9001/ws410/rest/contentcatalogs/apparel-ukContentCatalog" />
+	<catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:type="contentCatalogDTO" id="apparel-deContentCatalog" pk="8796093252184"
+		uri="http://37.153.99.110:9001/ws410/rest/contentcatalogs/apparel-deContentCatalog" />
+	<catalog id="demoProductCatalog" pk="8796093284952"
+		uri="http://37.153.99.110:9001/ws410/rest/catalogs/demoProductCatalog" />
+	<catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:type="contentCatalogDTO" id="demoContentCatalog" pk="8796093317720"
+		uri="http://37.153.99.110:9001/ws410/rest/contentcatalogs/demoContentCatalog" />
+</catalogs>

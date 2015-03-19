@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<category code="1" pk="8796114813070"
+	uri="http://37.153.99.110:9001/ws410/rest/catalogs/electronicsProductCatalog/catalogversions/Online/categories/1">
+	<comments />
+	<creationtime>2013-10-03T12:03:07.646Z</creationtime>
+	<modifiedtime>2013-10-03T12:03:09.890Z</modifiedtime>
+	<allSubcategories>
+		<category code="206" pk="8796114878606"
+			uri="http://37.153.99.110:9001/ws410/rest/catalogs/electronicsProductCatalog/catalogversions/Online/categories/206" />
+		<category code="585" pk="8796115140750"
+			uri="http://37.153.99.110:9001/ws410/rest/catalogs/electronicsProductCatalog/catalogversions/Online/categories/585" />
+		<category code="577" pk="8796115042446"
+			uri="http://37.153.99.110:9001/ws410/rest/catalogs/electronicsProductCatalog/catalogversions/Online/categories/577" />
+		<category code="1288" pk="8796115599502"
+			uri="http://37.153.99.110:9001/ws410/rest/catalogs/electronicsProductCatalog/catalogversions/Online/categories/1288" />
+		<category code="604" pk="8796115337358"
+			uri="http://37.153.99.110:9001/ws410/rest/catalogs/electronicsProductCatalog/catalogversions/Online/categories/604" />
+		<category code="575" pk="8796114976910"
+			uri="http://37.153.99.110:9001/ws410/rest/catalogs/electronicsProductCatalog/catalogversions/Online/categories/575" />
+		<category code="574" pk="8796114944142"
+			uri="http://37.153.99.110:9001/ws410/rest/catalogs/electronicsProductCatalog/catalogversions/Online/categories/574" />
+		<category code="597" pk="8796115271822"
+			uri="http://37.153.99.110:9001/ws410/rest/catalogs/electronicsProductCatalog/catalogversions/Online/categories/597" />
+		<category code="576" pk="8796115009678"
+			uri="http://37.153.99.110:9001/ws410/rest/catalogs/electronicsProductCatalog/catalogversions/Online/categories/576" />
+		<category code="814" pk="8796115370126"
+			uri="http://37.153.99.110:9001/ws410/rest/catalogs/electronicsProductCatalog/catalogversions/Online/categories/814" />
+		<category code="586" pk="8796115173518"
+			uri="http://37.153.99.110:9001/ws410/rest/catalogs/electronicsProductCatalog/catalogversions/Online/categories/586" />
+		<category code="587" pk="8796115206286"
+			uri="http://37.153.99.110:9001/ws410/rest/catalogs/electronicsProductCatalog/catalogversions/Online/categories/587" />
+		<category code="816" pk="8796115402894"
+			uri="http://37.153.99.110:9001/ws410/rest/catalogs/electronicsProductCatalog/catalogversions/Online/categories/816" />
+		<category code="598" pk="8796115304590"
+			uri="http://37.153.99.110:9001/ws410/rest/catalogs/electronicsProductCatalog/catalogversions/Online/categories/598" />
+		<category code="934" pk="8796115533966"
+			uri="http://37.153.99.110:9001/ws410/rest/catalogs/electronicsProductCatalog/catalogversions/Online/categories/934" />
+		<category code="106" pk="8796114845838"
+			uri="http://37.153.99.110:9001/ws410/rest/catalogs/electronicsProductCatalog/catalogversions/Online/categories/106" />
+		<category code="1201" pk="8796115566734"
+			uri="http://37.153.99.110:9001/ws410/rest/catalogs/electronicsProductCatalog/catalogversions/Online/categories/1201" />
+		<category code="588" pk="8796115239054"
+			uri="http://37.153.99.110:9001/ws410/rest/catalogs/electronicsProductCatalog/catalogversions/Online/categories/588" />
+		<category code="902" pk="8796115501198"
+			uri="http://37.153.99.110:9001/ws410/rest/catalogs/electronicsProductCatalog/catalogversions/Online/categories/902" />
+		<category code="571" pk="8796114911374"
+			uri="http://37.153.99.110:9001/ws410/rest/catalogs/electronicsProductCatalog/catalogversions/Online/categories/571" />
+		<category code="827" pk="8796115435662"
+			uri="http://37.153.99.110:9001/ws410/rest/catalogs/electronicsProductCatalog/catalogversions/Online/categories/827" />
+		<category code="1421" pk="8796115632270"
+			uri="http://37.153.99.110:9001/ws410/rest/catalogs/electronicsProductCatalog/catalogversions/Online/categories/1421" />
+		<category code="829" pk="8796115468430"
+			uri="http://37.153.99.110:9001/ws410/rest/catalogs/electronicsProductCatalog/catalogversions/Online/categories/829" />
+		<category code="578" pk="8796115075214"
+			uri="http://37.153.99.110:9001/ws410/rest/catalogs/electronicsProductCatalog/catalogversions/Online/categories/578" />
+		<category code="584" pk="8796115107982"
+			uri="http://37.153.99.110:9001/ws410/rest/catalogs/electronicsProductCatalog/catalogversions/Online/categories/584" />
+	</allSubcategories>
+	<allSupercategories />
+	<allowedPrincipals>
+		<principal xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			xsi:type="userGroupDTO" uid="customergroup" pk="8796125855749"
+			uri="http://37.153.99.110:9001/ws410/rest/usergroups/customergroup" />
+	</allowedPrincipals>
+	<catalogVersion version="Online" pk="8796093153881"
+		uri="http://37.153.99.110:9001/ws410/rest/catalogs/electronicsProductCatalog/catalogversions/Online" />
+	<categories>
+		<category code="106" pk="8796114845838"
+			uri="http://37.153.99.110:9001/ws410/rest/catalogs/electronicsProductCatalog/catalogversions/Online/categories/106" />
+		<category code="206" pk="8796114878606"
+			uri="http://37.153.99.110:9001/ws410/rest/catalogs/electronicsProductCatalog/catalogversions/Online/categories/206" />
+		<category code="571" pk="8796114911374"
+			uri="http://37.153.99.110:9001/ws410/rest/catalogs/electronicsProductCatalog/catalogversions/Online/categories/571" />
+		<category code="1421" pk="8796115632270"
+			uri="http://37.153.99.110:9001/ws410/rest/catalogs/electronicsProductCatalog/catalogversions/Online/categories/1421" />
+	</categories>
+	<categoryFeatureComponents />
+	<data_sheet />
+	<detail />
+	<linkComponents />
+	<logo />
+	<medias />
+	<name>Open Catalogue</name>
+	<normal />
+	<others />
+	<productCarouselComponents />
+	<productListComponents />
+	<products />
+	<promotions />
+	<restrictions />
+	<supercategories />
+	<thumbnails />
+</category>

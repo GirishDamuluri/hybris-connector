@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<product code="1" pk="8796290121729"
+	uri="http://37.153.99.110:9001/ws410/rest/catalogs/demoProductCatalog/catalogversions/Online/products/88">
+	<comments />
+	<creationtime>2013-11-28T12:33:48.108Z</creationtime>
+	<modifiedtime>2013-12-03T11:02:01.357Z</modifiedtime>
+	<approvalStatus>approved</approvalStatus>
+	<barcodes />
+	<catalogVersion version="Online" pk="8796093514329"
+		uri="http://37.153.99.110:9001/ws410/rest/catalogs/demoProductCatalog/catalogversions/Online" />
+	<classificationClasses />
+	<data_sheet>
+		<media code="/515Wx515H/1997551-5876.jpg"
+			downloadURL="/medias/camera-large.jpg?context=bWFzdGVyfGltYWdlc3wyNzgyMnxpbWFnZS9qcGVnfGltYWdlcy9oNDcvaDEzLzg3OTcwNTgwNzI2MDYuanBnfDYwNWI1MGRjNTlkMTk4MjI2MzczOTZjOTRmNGRmMWZkMDM0Y2ZhNDE4OTRiMmU2N2E0ZmUxNDcxZjQyYmFmZTM&amp;attachment=true"
+			pk="8796739829790"
+			uri="http://37.153.99.110:9001/ws410/rest/catalogs/electronicsProductCatalog/catalogversions/Online/medias//515Wx515H/1997551-5876.jpg" />
+	</data_sheet>
+	<deliveryModes />
+	<description>This camera is specifically designed for users who want
+		maximum reach without compromising image quality or convenience. It
+		features a high-quality optical zoom lens; it offers advanced features
+		in a compact, robust, easy to use body.
+		The lens used make this camera, ideal for anywhere that a longer zoom
+		length will help users capture better images.
+		The cameras lens has an expert level of engineering to minimise chromatic
+		aberrations and distortions offering edge-to-edge sharpness and
+		exceptional clarity in images. The camera also features a mode that
+		focuses down to just 2cm for detail-filled close-ups.
+		Inside the camera there is a sensor offering the renowned image quality that
+		users across the world expect from our products. In low-light
+		situations, users can adjust the camera to help keep images sharp.
+		You can film HD Movies at the touch of a button, for smooth movies that
+		will impress friends and family. The HDMI output can be used to
+		connect the camera to a HD ready TV for instant playback.
+		Manual shooting by selecting mode dial enables you to take full control of
+		modes such as Shutter Priority mode or Aperture Priority mode.
+		Capture all the action is superb for capturing dynamic close-ups as this
+		function keeps fast moving subjects in the frame and in focus, even
+		when the zoom is fully extended.
+		The camera has fully controllable exposure modes for the more advanced
+		photographer. There's even the option to date images to ensure users
+		never forget when they captured their new favourite photographs.
+		Ergonomically designed to fit comfortably in the user's hand even
+		throughout long shooting sessions, this item offers impressive levels
+		of technology considering its frame.
+	</description>
+	<detail />
+	<ean>6789</ean>
+	<europe1Discounts />
+	<europe1Prices>
+		<priceRow pk="8796322890783"
+			uri="http://37.153.99.110:9001/ws410/rest/pricerows/8796322890783" />
+	</europe1Prices>
+	<europe1Taxes />
+	<features />
+	<galleryImages>
+		<mediaContainer qualifier="1997551-5876" pk="8796148105266"
+			uri="http://37.153.99.110:9001/ws410/rest/catalogs/electronicsProductCatalog/catalogversions/Online/mediacontainers/1997551-5876" />
+	</galleryImages>
+	<linkComponents />
+	<logo>
+		<media code="/96Wx96H/1997551-5876.jpg"
+			downloadURL="/medias/camera-small.jpg?context=bWFzdGVyfGltYWdlc3w0ODUyfGltYWdlL2pwZWd8aW1hZ2VzL2g4OS9oMjYvODc5NzA1ODM2NzUxOC5qcGd8YjExODc0NmMzZDk2ZWEyYWI1Y2FhMzRhYjI1OTYzMDM4MGQ4ZmI0ZGExYjhlZGFkMWJkY2JkNDZmY2UwYzllZg&amp;attachment=true"
+			pk="8796739895326"
+			uri="http://37.153.99.110:9001/ws410/rest/catalogs/electronicsProductCatalog/catalogversions/Online/medias//96Wx96H/1997551-5876.jpg" />
+	</logo>
+	<name>Cloud Camera</name>
+	<normal>
+		<media code="/96Wx96H/1997551-5876.jpg"
+			downloadURL="/medias/camera-small.jpg?context=bWFzdGVyfGltYWdlc3w0ODUyfGltYWdlL2pwZWd8aW1hZ2VzL2g4OS9oMjYvODc5NzA1ODM2NzUxOC5qcGd8YjExODc0NmMzZDk2ZWEyYWI1Y2FhMzRhYjI1OTYzMDM4MGQ4ZmI0ZGExYjhlZGFkMWJkY2JkNDZmY2UwYzllZg&amp;attachment=true"
+			pk="8796739895326"
+			uri="http://37.153.99.110:9001/ws410/rest/catalogs/electronicsProductCatalog/catalogversions/Online/medias//96Wx96H/1997551-5876.jpg" />
+	</normal>
+	<numberOfReviews>0</numberOfReviews>
+	<others>
+		<media code="/96Wx96H/1997551-5876.jpg"
+			downloadURL="/medias/camera-small.jpg?context=bWFzdGVyfGltYWdlc3w0ODUyfGltYWdlL2pwZWd8aW1hZ2VzL2g4OS9oMjYvODc5NzA1ODM2NzUxOC5qcGd8YjExODc0NmMzZDk2ZWEyYWI1Y2FhMzRhYjI1OTYzMDM4MGQ4ZmI0ZGExYjhlZGFkMWJkY2JkNDZmY2UwYzllZg&amp;attachment=true"
+			pk="8796739895326"
+			uri="http://37.153.99.110:9001/ws410/rest/catalogs/electronicsProductCatalog/catalogversions/Online/medias//96Wx96H/1997551-5876.jpg" />
+	</others>
+	<picture code="camerathumbnail.png"
+		downloadURL="/medias/camera.png?context=bWFzdGVyfGltYWdlc3wxNjU2MXxpbWFnZS9wbmd8aW1hZ2VzL2g3MS9oNjgvODc5NzA0Njk2NDI1NC5wbmd8Y2U1OGNhZjZkOTA2ODM1MWU2M2NlOTI1YTIxNWJlNTMzYWM4ZTcxYzAzYTdlM2M0ZWMxZDk5ODRkODJhMmFjNA&amp;attachment=true"
+		pk="8797046931486"
+		uri="http://37.153.99.110:9001/ws410/rest/catalogs/demoProductCatalog/catalogversions/Online/medias/camerathumbnail.png" />
+	<priceQuantity>1.0</priceQuantity>
+	<productCarouselComponents />
+	<productDetailComponents />
+	<productFeatureComponents />
+	<productListComponents />
+	<productReferences>
+		<productReference pk="8796158591582"
+			uri="http://37.153.99.110:9001/ws410/rest/catalogs/demoProductCatalog/catalogversions/Online/products/88/productreferences/8796158591582?um__productreference;product__product;catalogversion__catalogversion;catalog=8796158591582;88,88;Online,Online;demoProductCatalog" />
+	</productReferences>
+	<productReviews />
+	<promotions />
+	<restrictions />
+	<stockLevels />
+	<summary>This camera is specifically designed for users who want
+		maximum reach without compromising image quality or convenience
+	</summary>
+	<supercategories>
+		<category code="100" pk="8796132802702"
+			uri="http://37.153.99.110:9001/ws410/rest/catalogs/demoProductCatalog/catalogversions/Staged/categories/100" />
+		<category code="100" pk="8796133064846"
+			uri="http://37.153.99.110:9001/ws410/rest/catalogs/demoProductCatalog/catalogversions/Online/categories/100" />
+		<category code="1" pk="8796133032078"
+			uri="http://37.153.99.110:9001/ws410/rest/catalogs/demoProductCatalog/catalogversions/Online/categories/1" />
+	</supercategories>
+	<thumbnail code="camerathumbnail.png"
+		downloadURL="/medias/camera.png?context=bWFzdGVyfGltYWdlc3wxNjU2MXxpbWFnZS9wbmd8aW1hZ2VzL2g3MS9oNjgvODc5NzA0Njk2NDI1NC5wbmd8Y2U1OGNhZjZkOTA2ODM1MWU2M2NlOTI1YTIxNWJlNTMzYWM4ZTcxYzAzYTdlM2M0ZWMxZDk5ODRkODJhMmFjNA&amp;attachment=true"
+		pk="8797046931486"
+		uri="http://37.153.99.110:9001/ws410/rest/catalogs/demoProductCatalog/catalogversions/Online/medias/camerathumbnail.png" />
+	<thumbnails>
+		<media code="/96Wx96H/1997551-5876.jpg"
+			downloadURL="/medias/camera-small.jpg?context=bWFzdGVyfGltYWdlc3w0ODUyfGltYWdlL2pwZWd8aW1hZ2VzL2g4OS9oMjYvODc5NzA1ODM2NzUxOC5qcGd8YjExODc0NmMzZDk2ZWEyYWI1Y2FhMzRhYjI1OTYzMDM4MGQ4ZmI0ZGExYjhlZGFkMWJkY2JkNDZmY2UwYzllZg&amp;attachment=true"
+			pk="8796739895326"
+			uri="http://37.153.99.110:9001/ws410/rest/catalogs/electronicsProductCatalog/catalogversions/Online/medias//96Wx96H/1997551-5876.jpg" />
+	</thumbnails>
+	<unit code="pieces" pk="8796093054986"
+		uri="http://37.153.99.110:9001/ws410/rest/units/pieces" />
+	<untypedFeatures />
+	<variants />
+	<vendors />
+</product>

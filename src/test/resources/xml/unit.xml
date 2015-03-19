@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<unit code="pieces" pk="8796093054986" uri="http://37.153.99.110:9001/ws410/rest/units/pieces">
+  <comments/>
+  <creationtime>2013-10-03T11:17:01.984Z</creationtime>
+  <modifiedtime>2013-10-03T11:17:02.427Z</modifiedtime>
+  <conversion>1.0</conversion>
+  <name>Piece</name>
+  <unitType>pieces</unitType>
+</unit>

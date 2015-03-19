@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<currencies uri="http://www.cloudelectronics.com/ws410/rest/currencies">
+  <currency isocode="EUR" pk="8796125823009" uri="http://www.cloudelectronics.com/ws410/rest/currencies/EUR"/>
+  <currency isocode="GBP" pk="8796125855777" uri="http://www.cloudelectronics.com/ws410/rest/currencies/GBP"/>
+  <currency isocode="USD" pk="8796125888545" uri="http://www.cloudelectronics.com/ws410/rest/currencies/USD"/>
+  <currency isocode="JPY" pk="8796125921313" uri="http://www.cloudelectronics.com/ws410/rest/currencies/JPY"/>
+</currencies>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<cartentry pk="8796093055020" uri="http://www.cloudelectronics.com/ws410/rest/carts/00000000/cartentries/8796093055020">
+  <basePrice>49.99</basePrice>
+  <calculated>true</calculated>
+  <entryNumber>0</entryNumber>
+  <giveAway>false</giveAway>
+  <info>product &quot;88&quot; with name &quot;Cloud Camera&quot;</info>
+  <order code="00000000" pk="8796093055019" uri="http://www.cloudelectronics.com/ws410/rest/carts/00000000"/>
+  <product code="88" pk="8796093382657" uri="http://www.cloudelectronics.com/ws410/rest/catalogs/demoProductCatalog/catalogversions/Online/products/88"/>
+  <quantity>1</quantity>
+  <totalPrice>49.99</totalPrice>
+  <unit code="pieces" pk="8796093054986" uri="http://www.cloudelectronics.com/ws410/rest/units/pieces"/>
+</cartentry>

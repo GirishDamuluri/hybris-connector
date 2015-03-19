@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<region isocode="US-AL" pk="8796093055011" uri="http://www.cloudelectronics.com/ws410/rest/countries/US/regions/US-AL">
+  <comments/>
+  <creationtime>2014-01-21T12:59:23.163Z</creationtime>
+  <modifiedtime>2014-01-21T12:59:23.169Z</modifiedtime>
+  <active>true</active>
+  <name>Alabama</name>
+  <country isocode="US" pk="8796100624418" uri="http://www.cloudelectronics.com/ws410/rest/countries/US"/>
+  <isocodeShort>AL</isocodeShort>
+</region>

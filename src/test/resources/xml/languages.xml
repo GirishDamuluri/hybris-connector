@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<languages uri="http://www.cloudelectronics.com/ws410/rest/languages">
+  <language isocode="en" pk="8796093055008" uri="http://www.cloudelectronics.com/ws410/rest/languages/en"/>
+  <language isocode="de" pk="8796125823008" uri="http://www.cloudelectronics.com/ws410/rest/languages/de"/>
+  <language isocode="ja" pk="8796125855776" uri="http://www.cloudelectronics.com/ws410/rest/languages/ja"/>
+  <language isocode="zh" pk="8796125888544" uri="http://www.cloudelectronics.com/ws410/rest/languages/zh"/>
+</languages>

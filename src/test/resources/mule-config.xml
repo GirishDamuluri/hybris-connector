@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:spring="http://www.springframework.org/schema/beans"
+	xmlns:hybris="http://www.mulesoft.org/schema/mule/hybris"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+        http://www.mulesoft.org/schema/mule/hybris http://www.mulesoft.org/schema/mule/hybris/1.0-SNAPSHOT/mule-hybris.xsd">
+
+	<hybris:config endpointUrl="http://localhost:${hybris.port}/ws410/rest"
+		username="admin" password="nimda" />
+
+	<flow name="getCatalogs">
+		<set-variable variableName="catalogs" value="#[new java.util.ArrayList()]" />
+
+		<hybris:get-catalogs fetchSize="1000" />
+		<foreach>
+			<expression-component>flowVars['catalogs'].add(payload);
+			</expression-component>
+		</foreach>
+		<set-payload value="#[flowVars['catalogs']]" />
+	</flow>
+
+	<flow name="getCatalogsPaged">
+		<set-variable variableName="catalogs" value="#[new java.util.ArrayList()]" />
+
+		<hybris:get-catalogs fetchSize="4" />
+		<foreach>
+			<choice>
+				<when expression="#[flowVars.counter &gt; 4]">
+					<expression-component>flowVars['rootMessage'].payload.close();
+					</expression-component>
+				</when>
+				<otherwise>
+					<expression-component>flowVars['catalogs'].add(payload);
+					</expression-component>
+				</otherwise>
+			</choice>
+		</foreach>
+		<set-payload value="#[flowVars['catalogs']]" />
+	</flow>
+
+	<flow name="getCatalog">
+		<hybris:get-catalog catalogId="electronicsProductCatalog" />
+	</flow>
+
+	<flow name="upsertCatalog">
+		<hybris:upsert-catalog>
+			<hybris:catalog ref="#[payload]" />
+		</hybris:upsert-catalog>
+	</flow>
+
+	<flow name="deleteCatalog">
+		<hybris:delete-catalog catalogId="electronicsProductCatalog" />
+	</flow>
+
+	<flow name="getCatalogVersion">
+		<hybris:get-catalog-version catalogId="electronicsProductCatalog"
+			version="Online" />
+	</flow>
+
+	<flow name="upsertCatalogVersion">
+		<hybris:upsert-catalog-version>
+			<hybris:catalog-version ref="#[payload]" />
+		</hybris:upsert-catalog-version>
+	</flow>
+
+	<flow name="deleteCatalogVersion">
+		<hybris:delete-catalog-version
+			catalogId="electronicsProductCatalog" version="Online" />
+	</flow>
+
+	<flow name="getCategory">
+		<hybris:get-category catalogId="electronicsProductCatalog"
+			version="Online" categoryCode="1" />
+	</flow>
+
+	<flow name="upsertCategory">
+		<hybris:upsert-category>
+			<hybris:category ref="#[payload]" />
+		</hybris:upsert-category>
+	</flow>
+
+	<flow name="deleteCategory">
+		<hybris:delete-category catalogId="electronicsProductCatalog"
+			version="Online" categoryCode="1" />
+	</flow>
+
+	<flow name="getProduct">
+		<hybris:get-product catalogId="electronicsProductCatalog"
+			version="Online" productCode="1" />
+	</flow>
+
+	<flow name="upsertProduct">
+		<hybris:upsert-product>
+			<hybris:product ref="#[payload]" />
+		</hybris:upsert-product>
+	</flow>
+
+	<flow name="deleteProduct">
+		<hybris:delete-product catalogId="electronicsProductCatalog"
+			version="Online" productCode="1" />
+	</flow>
+
+	<flow name="getUnitsPaged">
+		<set-variable variableName="units" value="#[new java.util.ArrayList()]" />
+
+		<hybris:get-units fetchSize="4" />
+		<foreach>
+			<choice>
+				<when expression="#[flowVars.counter &gt; 4]">
+					<expression-component>flowVars['rootMessage'].payload.close();
+					</expression-component>
+				</when>
+				<otherwise>
+					<expression-component>flowVars['units'].add(payload);
+					</expression-component>
+				</otherwise>
+			</choice>
+		</foreach>
+		<set-payload value="#[flowVars['units']]" />
+	</flow>
+
+	<flow name="getUnit">
+		<hybris:get-unit unitCode="pieces" />
+	</flow>
+
+	<flow name="upsertUnit">
+		<hybris:upsert-unit>
+			<hybris:unit ref="#[payload]" />
+		</hybris:upsert-unit>
+	</flow>
+
+	<flow name="deleteUnit">
+		<hybris:delete-unit unitCode="pieces" />
+	</flow>
+
+	<flow name="getCurrenciesPaged">
+		<set-variable variableName="currencies" value="#[new java.util.ArrayList()]" />
+
+		<hybris:get-currencies fetchSize="3" />
+		<foreach>
+			<choice>
+				<when expression="#[flowVars.counter &gt; 3]">
+					<expression-component>flowVars['rootMessage'].payload.close();
+					</expression-component>
+				</when>
+				<otherwise>
+					<expression-component>flowVars['currencies'].add(payload);
+					</expression-component>
+				</otherwise>
+			</choice>
+		</foreach>
+		<set-payload value="#[flowVars['currencies']]" />
+	</flow>
+
+	<flow name="getCurrency">
+		<hybris:get-currency isocode="EUR" />
+	</flow>
+
+	<flow name="upsertCurrency">
+		<hybris:upsert-currency>
+			<hybris:currency ref="#[payload]" />
+		</hybris:upsert-currency>
+	</flow>
+
+	<flow name="deleteCurrency">
+		<hybris:delete-currency isocode="EUR" />
+	</flow>
+
+	<flow name="getDiscountsPaged">
+		<set-variable variableName="discounts" value="#[new java.util.ArrayList()]" />
+
+		<hybris:get-discounts fetchSize="3" />
+		<foreach>
+			<choice>
+				<when expression="#[flowVars.counter &gt;= 3]">
+					<expression-component>flowVars['rootMessage'].payload.close();
+					</expression-component>
+				</when>
+				<otherwise>
+					<expression-component>flowVars['discounts'].add(payload);
+					</expression-component>
+				</otherwise>
+			</choice>
+		</foreach>
+		<set-payload value="#[flowVars['discounts']]" />
+	</flow>
+
+	<flow name="getDiscount">
+		<hybris:get-discount code="d1" />
+	</flow>
+
+	<flow name="upsertDiscount">
+		<hybris:upsert-discount>
+			<hybris:discount ref="#[payload]" />
+		</hybris:upsert-discount>
+	</flow>
+
+	<flow name="deleteDiscount">
+		<hybris:delete-discount code="d1" />
+	</flow>
+
+	<flow name="getCartsPaged">
+		<set-variable variableName="carts" value="#[new java.util.ArrayList()]" />
+
+		<hybris:get-carts fetchSize="2" />
+		<foreach>
+			<choice>
+				<when expression="#[flowVars.counter &gt;= 2]">
+					<expression-component>flowVars['rootMessage'].payload.close();
+					</expression-component>
+				</when>
+				<otherwise>
+					<expression-component>flowVars['carts'].add(payload);
+					</expression-component>
+				</otherwise>
+			</choice>
+		</foreach>
+		<set-payload value="#[flowVars['carts']]" />
+	</flow>
+
+	<flow name="getCart">
+		<hybris:get-cart code="00000000" />
+	</flow>
+
+	<flow name="upsertCart">
+		<hybris:upsert-cart>
+			<hybris:cart ref="#[payload]" />
+		</hybris:upsert-cart>
+	</flow>
+
+	<flow name="deleteCart">
+		<hybris:delete-cart code="00000000" />
+	</flow>
+
+	<flow name="getCartEntriesPaged">
+		<set-variable variableName="cartentries" value="#[new java.util.ArrayList()]" />
+
+		<hybris:get-cart-entries fetchSize="2" />
+		<foreach>
+			<choice>
+				<when expression="#[flowVars.counter &gt;= 2]">
+					<expression-component>flowVars['rootMessage'].payload.close();
+					</expression-component>
+				</when>
+				<otherwise>
+					<expression-component>flowVars['cartentries'].add(payload);
+					</expression-component>
+				</otherwise>
+			</choice>
+		</foreach>
+		<set-payload value="#[flowVars['cartentries']]" />
+	</flow>
+
+	<flow name="getCartEntry">
+		<hybris:get-cart-entry pk="8796093055020" />
+	</flow>
+
+	<flow name="upsertCartEntry">
+		<hybris:upsert-cart-entry>
+			<hybris:cart-entry ref="#[payload]" />
+		</hybris:upsert-cart-entry>
+	</flow>
+
+	<flow name="deleteCartEntry">
+		<hybris:delete-cart-entry pk="8796093055020" />
+	</flow>
+	
+	<flow name="getPaymentModesPaged">
+		<set-variable variableName="paymentmodes" value="#[new java.util.ArrayList()]" />
+
+		<hybris:get-payment-modes fetchSize="2" />
+		<foreach>
+			<choice>
+				<when expression="#[flowVars.counter &gt;= 2]">
+					<expression-component>flowVars['rootMessage'].payload.close();
+					</expression-component>
+				</when>
+				<otherwise>
+					<expression-component>flowVars['paymentmodes'].add(payload);
+					</expression-component>
+				</otherwise>
+			</choice>
+		</foreach>
+		<set-payload value="#[flowVars['paymentmodes']]" />
+	</flow>
+
+	<flow name="getPaymentMode">
+		<hybris:get-payment-mode code="p1" />
+	</flow>
+
+	<flow name="upsertPaymentMode">
+		<hybris:upsert-payment-mode>
+			<hybris:payment-mode ref="#[payload]" />
+		</hybris:upsert-payment-mode>
+	</flow>
+
+	<flow name="deletePaymentMode">
+		<hybris:delete-payment-mode code="p1" />
+	</flow>
+
+	<flow name="getCountriesPaged">
+		<set-variable variableName="countries" value="#[new java.util.ArrayList()]" />
+
+		<hybris:get-countries fetchSize="10" />
+		<foreach>
+			<choice>
+				<when expression="#[flowVars.counter &gt; 10]">
+					<expression-component>flowVars['rootMessage'].payload.close();
+					</expression-component>
+				</when>
+				<otherwise>
+					<expression-component>flowVars['countries'].add(payload);
+					</expression-component>
+				</otherwise>
+			</choice>
+		</foreach>
+		<set-payload value="#[flowVars['countries']]" />
+	</flow>
+
+	<flow name="getCountry">
+		<hybris:get-country isocode="ZM" />
+	</flow>
+
+	<flow name="upsertCountry">
+		<hybris:upsert-country>
+			<hybris:country ref="#[payload]" />
+		</hybris:upsert-country>
+	</flow>
+
+	<flow name="deleteCountry">
+		<hybris:delete-country isocode="XX" />
+	</flow>
+
+	<flow name="getRegionsPaged">
+		<set-variable variableName="regions" value="#[new java.util.ArrayList()]" />
+
+		<hybris:get-regions fetchSize="10" />
+		<foreach>
+			<choice>
+				<when expression="#[flowVars.counter &gt; 10]">
+					<expression-component>flowVars['rootMessage'].payload.close();
+					</expression-component>
+				</when>
+				<otherwise>
+					<expression-component>flowVars['regions'].add(payload);
+					</expression-component>
+				</otherwise>
+			</choice>
+		</foreach>
+		<set-payload value="#[flowVars['regions']]" />
+	</flow>
+
+	<flow name="getRegion">
+		<hybris:get-region isocode="US-AL" />
+	</flow>
+
+	<flow name="upsertRegion">
+		<hybris:upsert-region>
+			<hybris:region ref="#[payload]" />
+		</hybris:upsert-region>
+	</flow>
+
+	<flow name="deleteRegion">
+		<hybris:delete-region isocode="US-AL" />
+	</flow>
+	
+	<flow name="getLanguagesPaged">
+		<set-variable variableName="languages" value="#[new java.util.ArrayList()]" />
+
+		<hybris:get-languages fetchSize="2" />
+		<foreach>
+			<choice>
+				<when expression="#[flowVars.counter &gt;= 2]">
+					<expression-component>flowVars['rootMessage'].payload.close();
+					</expression-component>
+				</when>
+				<otherwise>
+					<expression-component>flowVars['languages'].add(payload);
+					</expression-component>
+				</otherwise>
+			</choice>
+		</foreach>
+		<set-payload value="#[flowVars['languages']]" />
+	</flow>
+
+	<flow name="getLanguage">
+		<hybris:get-language isocode="en" />
+	</flow>
+
+	<flow name="upsertLanguage">
+		<hybris:upsert-language>
+			<hybris:language ref="#[payload]" />
+		</hybris:upsert-language>
+	</flow>
+
+	<flow name="deleteLanguage">
+		<hybris:delete-language isocode="en" />
+	</flow>
+</mule>

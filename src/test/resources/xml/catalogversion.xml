@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<catalogversion version="Online" pk="8796093153881"
+	uri="http://37.153.99.110:9001/ws410/rest/catalogs/electronicsProductCatalog/catalogversions/Online">
+	<comments />
+	<creationtime>2013-10-03T11:18:45.791Z</creationtime>
+	<modifiedtime>2013-10-03T11:20:23.707Z</modifiedtime>
+	<active>true</active>
+	<agreements />
+	<catalog id="electronicsProductCatalog" pk="8796093088344"
+		uri="http://37.153.99.110:9001/ws410/rest/catalogs/electronicsProductCatalog" />
+	<facetSearchConfigs>
+		<solrFacetSearchConfig name="electronicsIndex"
+			pk="8796093057176"
+			uri="http://37.153.99.110:9001/ws410/rest/solrfacetsearchconfigs/electronicsIndex">
+			<enabledLanguageFallbackMechanism>false
+			</enabledLanguageFallbackMechanism>
+		</solrFacetSearchConfig>
+	</facetSearchConfigs>
+	<inclAssurance>false</inclAssurance>
+	<inclDuty>false</inclDuty>
+	<inclFreight>false</inclFreight>
+	<inclPacking>false</inclPacking>
+	<incomingSynchronizations>
+		<syncItemJob code="sync electronicsProductCatalog:Staged-&gt;Online"
+			pk="8796094136820"
+			uri="http://37.153.99.110:9001/ws410/rest/catalogversionsyncjobs/sync electronicsProductCatalog:Staged-&gt;Online" />
+	</incomingSynchronizations>
+	<languages>
+		<language isocode="ja" pk="8796125855776"
+			uri="http://37.153.99.110:9001/ws410/rest/languages/ja" />
+		<language isocode="en" pk="8796093055008"
+			uri="http://37.153.99.110:9001/ws410/rest/languages/en" />
+		<language isocode="de" pk="8796125823008"
+			uri="http://37.153.99.110:9001/ws410/rest/languages/de" />
+		<language isocode="zh" pk="8796125888544"
+			uri="http://37.153.99.110:9001/ws410/rest/languages/zh" />
+	</languages>
+	<mnemonic>ELE-O</mnemonic>
+	<previews />
+	<readPrincipals>
+		<principal xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			xsi:type="userGroupDTO" uid="employeegroup" pk="8796125822981"
+			uri="http://37.153.99.110:9001/ws410/rest/usergroups/employeegroup" />
+		<principal xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			xsi:type="employeeDTO" uid="productmanager" pk="8796125888516"
+			uri="http://37.153.99.110:9001/ws410/rest/employees/productmanager">
+			<authorizedToUnlockPages>false</authorizedToUnlockPages>
+			<loginDisabled>false</loginDisabled>
+		</principal>
+		<principal xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			xsi:type="userGroupDTO" uid="productmanagergroup" pk="8796126085125"
+			uri="http://37.153.99.110:9001/ws410/rest/usergroups/productmanagergroup" />
+	</readPrincipals>
+	<rootCategories>
+		<category code="1" pk="8796114813070"
+			uri="http://37.153.99.110:9001/ws410/rest/catalogs/electronicsProductCatalog/catalogversions/Online/categories/1" />
+		<category code="brands" pk="8796115665038"
+			uri="http://37.153.99.110:9001/ws410/rest/catalogs/electronicsProductCatalog/catalogversions/Online/categories/brands" />
+	</rootCategories>
+	<synchronizations />
+	<territories />
+	<writePrincipals>
+		<principal xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			xsi:type="employeeDTO" uid="productmanager" pk="8796125888516"
+			uri="http://37.153.99.110:9001/ws410/rest/employees/productmanager">
+			<authorizedToUnlockPages>false</authorizedToUnlockPages>
+			<loginDisabled>false</loginDisabled>
+		</principal>
+		<principal xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			xsi:type="userGroupDTO" uid="productmanagergroup" pk="8796126085125"
+			uri="http://37.153.99.110:9001/ws410/rest/usergroups/productmanagergroup" />
+	</writePrincipals>
+</catalogversion>

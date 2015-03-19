@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<country isocode="ZM" pk="8796101115938" uri="http://37.153.99.110:9001/ws410/rest/countries/ZM">
+  <comments/>
+  <creationtime>2013-10-03T11:17:38.205Z</creationtime>
+  <modifiedtime>2013-11-23T14:54:49.861Z</modifiedtime>
+  <active>false</active>
+  <name>France</name>
+  <baseStores/>
+  <regions/>
+  <zones/>
+</country>

@@ -1,0 +1,221 @@
+<!-- BEGIN_INCLUDE(hybris:get-catalogs) -->
+    <hybris:get-catalogs />
+<!-- END_INCLUDE(hybris:get-catalogs) -->
+
+<!-- BEGIN_INCLUDE(hybris:get-catalog) -->
+    <hybris:get-catalog catalogId="xxxxx" />
+<!-- END_INCLUDE(hybris:get-catalog) -->
+
+<!-- BEGIN_INCLUDE(hybris:upsert-catalog) -->
+    <hybris:upsert-catalog>
+		<hybris:catalog ref="#[payload]" />
+    </hybris:upsert-catalog>
+<!-- END_INCLUDE(hybris:upsert-catalog) -->
+
+<!-- BEGIN_INCLUDE(hybris:delete-catalog) -->
+    <hybris:delete-catalog catalogId="xxxxx" />
+<!-- END_INCLUDE(hybris:delete-catalog) --> 
+
+<!-- BEGIN_INCLUDE(hybris:get-catalog-version) -->
+    <hybris:get-catalog-version catalogId="xxxxx" version="version2" />
+<!-- END_INCLUDE(hybris:get-catalog-version) -->
+
+<!-- BEGIN_INCLUDE(hybris:upsert-catalog-version) -->
+    <hybris:upsert-catalog-version>
+        <hybris:catalog-version ref="#[payload]" />
+    </hybris:upsert-catalog-version>
+<!-- END_INCLUDE(hybris:upsert-catalog-version) -->
+
+<!-- BEGIN_INCLUDE(hybris:delete-catalog-version) -->
+    <hybris:delete-catalog-version catalogId="xxxxx" version="version2" />
+<!-- END_INCLUDE(hybris:delete-catalog-version) --> 
+
+<!-- BEGIN_INCLUDE(hybris:get-category) -->
+    <hybris:get-category catalogId="xxxxx" version="version2" categoryCode="zzzzz" />
+<!-- END_INCLUDE(hybris:get-category) -->
+
+<!-- BEGIN_INCLUDE(hybris:upsert-category) -->
+    <hybris:upsert-category>
+        <hybris:category ref="#[payload]" />
+    </hybris:upsert-category>
+<!-- END_INCLUDE(hybris:upsert-category) -->
+
+<!-- BEGIN_INCLUDE(hybris:delete-category) -->
+    <hybris:delete-category catalogId="xxxxx" version="version2" categoryCode="zzzzz" />
+<!-- END_INCLUDE(hybris:delete-category) --> 
+
+<!-- BEGIN_INCLUDE(hybris:get-product) -->
+    <hybris:get-product catalogId="xxxxx" version="version2" productCode="zzzzz" />
+<!-- END_INCLUDE(hybris:get-product) -->
+
+<!-- BEGIN_INCLUDE(hybris:upsert-product) -->
+    <hybris:upsert-product>
+        <hybris:product ref="#[payload]" />
+    </hybris:upsert-product>
+<!-- END_INCLUDE(hybris:upsert-product) -->
+
+<!-- BEGIN_INCLUDE(hybris:delete-product) -->
+    <hybris:delete-product catalogId="xxxxx" version="version2" productCode="zzzzz" />
+<!-- END_INCLUDE(hybris:delete-product) --> 
+
+<!-- BEGIN_INCLUDE(hybris:get-units) -->
+    <hybris:get-units />
+<!-- END_INCLUDE(hybris:get-units) -->
+
+<!-- BEGIN_INCLUDE(hybris:get-unit) -->
+    <hybris:get-unit unitCode="xxxxx" />
+<!-- END_INCLUDE(hybris:get-unit) -->
+
+<!-- BEGIN_INCLUDE(hybris:upsert-unit) -->
+    <hybris:upsert-unit>
+        <hybris:unit ref="#[payload]" />
+    </hybris:upsert-unit>
+<!-- END_INCLUDE(hybris:upsert-unit) -->
+
+<!-- BEGIN_INCLUDE(hybris:delete-unit) -->
+    <hybris:delete-unit unitCode="xxxxx" />
+<!-- END_INCLUDE(hybris:delete-unit) --> 
+
+<!-- BEGIN_INCLUDE(hybris:get-currencies) -->
+    <hybris:get-currencies />
+<!-- END_INCLUDE(hybris:get-currencies) -->
+
+<!-- BEGIN_INCLUDE(hybris:get-currency) -->
+    <hybris:get-currency isocode="ZM" />
+<!-- END_INCLUDE(hybris:get-currency) -->
+
+<!-- BEGIN_INCLUDE(hybris:upsert-currency) -->
+    <hybris:upsert-currency>
+        <hybris:currency ref="#[payload]" />
+    </hybris:upsert-currency>
+<!-- END_INCLUDE(hybris:upsert-currency) -->
+
+<!-- BEGIN_INCLUDE(hybris:delete-currency) -->
+    <hybris:delete-currency isocode="ZM" />
+<!-- END_INCLUDE(hybris:delete-currency) --> 
+
+<!-- BEGIN_INCLUDE(hybris:get-discounts) -->
+    <hybris:get-discounts />
+<!-- END_INCLUDE(hybris:get-discounts) -->
+
+<!-- BEGIN_INCLUDE(hybris:get-discount) -->
+    <hybris:get-discount code="d1" />
+<!-- END_INCLUDE(hybris:get-discount) -->
+
+<!-- BEGIN_INCLUDE(hybris:upsert-discount) -->
+    <hybris:upsert-discount>
+        <hybris:discount ref="#[payload]" />
+    </hybris:upsert-discount>
+<!-- END_INCLUDE(hybris:upsert-discount) -->
+
+<!-- BEGIN_INCLUDE(hybris:delete-discount) -->
+    <hybris:delete-discount code="d1" />
+<!-- END_INCLUDE(hybris:delete-discount) --> 
+
+<!-- BEGIN_INCLUDE(hybris:get-carts) -->
+    <hybris:get-carts />
+<!-- END_INCLUDE(hybris:get-carts) -->
+
+<!-- BEGIN_INCLUDE(hybris:get-cart) -->
+    <hybris:get-cart code="00000000" />
+<!-- END_INCLUDE(hybris:get-cart) -->
+
+<!-- BEGIN_INCLUDE(hybris:upsert-cart) -->
+    <hybris:upsert-cart>
+        <hybris:cart ref="#[payload]" />
+    </hybris:upsert-cart>
+<!-- END_INCLUDE(hybris:upsert-cart) -->
+
+<!-- BEGIN_INCLUDE(hybris:delete-cart) -->
+    <hybris:delete-cart code="00000000" />
+<!-- END_INCLUDE(hybris:delete-cart) --> 
+
+<!-- BEGIN_INCLUDE(hybris:get-cart-entries) -->
+    <hybris:get-cart-entries />
+<!-- END_INCLUDE(hybris:get-cart-entries) -->
+
+<!-- BEGIN_INCLUDE(hybris:get-cart-entry) -->
+    <hybris:get-cart-entry pk="00000000" />
+<!-- END_INCLUDE(hybris:get-cart-entry) -->
+
+<!-- BEGIN_INCLUDE(hybris:upsert-cart-entry) -->
+    <hybris:upsert-cart-entry>
+        <hybris:cart-entry ref="#[payload]" />
+    </hybris:upsert-cart-entry>
+<!-- END_INCLUDE(hybris:upsert-cart-entry) -->
+
+<!-- BEGIN_INCLUDE(hybris:delete-cart-entry) -->
+    <hybris:delete-cart-entry pk="00000000" />
+<!-- END_INCLUDE(hybris:delete-cart-entry) --> 
+
+<!-- BEGIN_INCLUDE(hybris:get-payment-modes) -->
+    <hybris:get-payment-modes />
+<!-- END_INCLUDE(hybris:get-payment-modes) -->
+
+<!-- BEGIN_INCLUDE(hybris:get-payment-mode) -->
+    <hybris:get-payment-mode code="p1" />
+<!-- END_INCLUDE(hybris:get-payment-mode) -->
+
+<!-- BEGIN_INCLUDE(hybris:upsert-payment-mode) -->
+    <hybris:upsert-payment-mode>
+        <hybris:payment-mode ref="#[payload]" />
+    </hybris:upsert-payment-mode>
+<!-- END_INCLUDE(hybris:upsert-payment-mode) -->
+
+<!-- BEGIN_INCLUDE(hybris:delete-payment-mode) -->
+    <hybris:delete-payment-mode code="p1" />
+<!-- END_INCLUDE(hybris:delete-payment-mode) --> 
+
+<!-- BEGIN_INCLUDE(hybris:get-countries) -->
+    <hybris:get-countries />
+<!-- END_INCLUDE(hybris:get-countries) -->
+
+<!-- BEGIN_INCLUDE(hybris:get-country) -->
+    <hybris:get-country isocode="ZM" />
+<!-- END_INCLUDE(hybris:get-country) -->
+
+<!-- BEGIN_INCLUDE(hybris:upsert-country) -->
+    <hybris:upsert-country>
+		<hybris:country ref="#[payload]" />
+    </hybris:upsert-country>
+<!-- END_INCLUDE(hybris:upsert-country) -->
+
+<!-- BEGIN_INCLUDE(hybris:delete-country) -->
+    <hybris:delete-country isocode="ZM" />
+<!-- END_INCLUDE(hybris:delete-country) --> 
+
+<!-- BEGIN_INCLUDE(hybris:get-regions) -->
+    <hybris:get-regions />
+<!-- END_INCLUDE(hybris:get-regions) -->
+
+<!-- BEGIN_INCLUDE(hybris:get-region) -->
+    <hybris:get-region isocode="US-AL" />
+<!-- END_INCLUDE(hybris:get-region) -->
+
+<!-- BEGIN_INCLUDE(hybris:upsert-region) -->
+    <hybris:upsert-region>
+        <hybris:region ref="#[payload]" />
+    </hybris:upsert-region>
+<!-- END_INCLUDE(hybris:upsert-region) -->
+
+<!-- BEGIN_INCLUDE(hybris:delete-region) -->
+    <hybris:delete-region isocode="US-AL" />
+<!-- END_INCLUDE(hybris:delete-region) --> 
+
+<!-- BEGIN_INCLUDE(hybris:get-languages) -->
+    <hybris:get-languages />
+<!-- END_INCLUDE(hybris:get-languages) -->
+
+<!-- BEGIN_INCLUDE(hybris:get-language) -->
+    <hybris:get-language isocode="en" />
+<!-- END_INCLUDE(hybris:get-language) -->
+
+<!-- BEGIN_INCLUDE(hybris:upsert-language) -->
+    <hybris:upsert-language>
+        <hybris:language ref="#[payload]" />
+    </hybris:upsert-language>
+<!-- END_INCLUDE(hybris:upsert-language) -->
+
+<!-- BEGIN_INCLUDE(hybris:delete-language) -->
+    <hybris:delete-language isocode="en" />
+<!-- END_INCLUDE(hybris:delete-language) --> 

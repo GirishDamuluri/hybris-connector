@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<discounts uri="http://www.cloudelectronics.com/ws410/rest/discounts">
+	<discount code="d1"
+		uri="http://www.cloudelectronics.com/ws410/rest/discount/d1" />
+	<discount code="d2"
+		uri="http://www.cloudelectronics.com/ws410/rest/discount/d3" />
+	<discount code="d3"
+		uri="http://www.cloudelectronics.com/ws410/rest/discount/d3" />
+</discounts>

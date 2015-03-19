@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<cart code="00000000" pk="8796093055019" uri="http://www.cloudelectronics.com/ws410/rest/carts/00000000">
+  <calculated>true</calculated>
+  <currency isocode="GBP" pk="8796125855777" uri="http://www.cloudelectronics.com/ws410/rest/currencies/GBP"/>
+  <date>2014-01-20T15:42:36.895Z</date>
+  <deliveryAddress pk="8796158590999" uri="http://www.cloudelectronics.com/ws410/rest/addresses/8796158590999"/>
+  <deliveryCost>0.0</deliveryCost>
+  <discounts/>
+  <entries>
+    <entry pk="8796093055020" uri="http://www.cloudelectronics.com/ws410/rest/carts/00000000/cartentries/8796093055020"/>
+  </entries>
+  <net>false</net>
+  <paymentCost>0.0</paymentCost>
+  <totalDiscounts>0.0</totalDiscounts>
+  <totalPrice>49.99</totalPrice>
+  <totalTax>2.38</totalTax>
+  <user uid="wesley.miles@capgemini.com" pk="8796159049732" uri="http://www.cloudelectronics.com/ws410/rest/customers/wesley.miles@capgemini.com">
+    <authorizedToUnlockPages>false</authorizedToUnlockPages>
+    <loginDisabled>false</loginDisabled>
+  </user>
+</cart>

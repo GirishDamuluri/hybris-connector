@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<catalog id="electronicsProductCatalog" pk="8796093317720"
+	uri="http://localhost:9001/ws410/rest/catalogs/electronicsProductCatalog">
+	<comments />
+	<creationtime>2013-07-26T13:51:59.496+01:00</creationtime>
+	<modifiedtime>2013-07-26T13:52:13.093+01:00</modifiedtime>
+	<activeCatalogVersion version="Online" pk="8796093514329"
+		uri="http://localhost:9001/ws410/rest/catalogs/electronicsProductCatalog/catalogversions/Online" />
+	<agreements />
+	<baseStores>
+		<baseStore uid="electronics" pk="8796093089757"
+			uri="http://localhost:9001/ws410/rest/basestores/electronics">
+			<customerAllowedToIgnoreSuggestions>false
+			</customerAllowedToIgnoreSuggestions>
+			<net>false</net>
+		</baseStore>
+	</baseStores>
+	<catalogVersions>
+		<catalogVersion version="Staged" pk="8796093481561"
+			uri="http://localhost:9001/ws410/rest/catalogs/electronicsProductCatalog/catalogversions/Staged" />
+		<catalogVersion version="Online" pk="8796093514329"
+			uri="http://localhost:9001/ws410/rest/catalogs/electronicsProductCatalog/catalogversions/Online" />
+	</catalogVersions>
+	<defaultCatalog>false</defaultCatalog>
+	<inclAssurance>false</inclAssurance>
+	<inclDuty>false</inclDuty>
+	<inclFreight>false</inclFreight>
+	<inclPacking>false</inclPacking>
+	<languages>
+		<language isocode="ja" pk="8796093087776"
+			uri="http://localhost:9001/ws410/rest/languages/ja" />
+		<language isocode="en" pk="8796126052384"
+			uri="http://localhost:9001/ws410/rest/languages/en" />
+		<language isocode="de" pk="8796093055008"
+			uri="http://localhost:9001/ws410/rest/languages/de" />
+		<language isocode="zh" pk="8796093186080"
+			uri="http://localhost:9001/ws410/rest/languages/zh" />
+	</languages>
+	<name>Electronics Product Catalog</name>
+	<previewURLTemplate>/storefoundation/index.jsf</previewURLTemplate>
+	<restrictions />
+	<rootCategories>
+		<category code="1" pk="8796121989262"
+			uri="http://localhost:9001/ws410/rest/catalogs/electronicsProductCatalog/catalogversions/Online/categories/1" />
+		<category code="brands" pk="8796122841230"
+			uri="http://localhost:9001/ws410/rest/catalogs/electronicsProductCatalog/catalogversions/Online/categories/brands" />
+	</rootCategories>
+	<territories />
+	<urlPatterns />
+	<version>Online</version>
+</catalog>

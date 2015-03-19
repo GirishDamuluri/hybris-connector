@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<paymentmodes uri="http://www.cloudelectronics.com/ws410/rest/paymentmodes">
+	<paymentmode code="p1" pk="11111"
+		uri="http://www.cloudelectronics.com/ws410/rest/paymentmodes/p1" />
+	<paymentmode code="p2" pk="22222"
+		uri="http://www.cloudelectronics.com/ws410/rest/paymentmodes/p2" />
+</paymentmodes>

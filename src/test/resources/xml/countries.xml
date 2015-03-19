@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<countries uri="http://37.153.99.110:9001/ws410/rest/countries">
+	<country isocode="AD" pk="8796093055010"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/AD" />
+	<country isocode="AE" pk="8796093087778"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/AE" />
+	<country isocode="AF" pk="8796093120546"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/AF" />
+	<country isocode="AG" pk="8796093153314"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/AG" />
+	<country isocode="AI" pk="8796093186082"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/AI" />
+	<country isocode="AL" pk="8796093218850"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/AL" />
+	<country isocode="AM" pk="8796093251618"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/AM" />
+	<country isocode="AO" pk="8796093284386"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/AO" />
+	<country isocode="AQ" pk="8796093317154"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/AQ" />
+	<country isocode="AR" pk="8796093349922"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/AR" />
+	<country isocode="AS" pk="8796093382690"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/AS" />
+	<country isocode="AT" pk="8796093415458"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/AT" />
+	<country isocode="AU" pk="8796093448226"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/AU" />
+	<country isocode="AW" pk="8796093480994"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/AW" />
+	<country isocode="AX" pk="8796093513762"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/AX" />
+	<country isocode="AZ" pk="8796093546530"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/AZ" />
+	<country isocode="BA" pk="8796093579298"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/BA" />
+	<country isocode="BB" pk="8796093612066"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/BB" />
+	<country isocode="BD" pk="8796093644834"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/BD" />
+	<country isocode="BE" pk="8796093677602"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/BE" />
+	<country isocode="BF" pk="8796093710370"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/BF" />
+	<country isocode="BG" pk="8796093743138"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/BG" />
+	<country isocode="BH" pk="8796093775906"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/BH" />
+	<country isocode="BI" pk="8796093808674"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/BI" />
+	<country isocode="BJ" pk="8796093841442"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/BJ" />
+	<country isocode="BL" pk="8796093874210"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/BL" />
+	<country isocode="BM" pk="8796093906978"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/BM" />
+	<country isocode="BN" pk="8796093939746"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/BN" />
+	<country isocode="BO" pk="8796093972514"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/BO" />
+	<country isocode="BQ" pk="8796094005282"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/BQ" />
+	<country isocode="BR" pk="8796094038050"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/BR" />
+	<country isocode="BS" pk="8796094070818"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/BS" />
+	<country isocode="BT" pk="8796094103586"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/BT" />
+	<country isocode="BV" pk="8796094136354"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/BV" />
+	<country isocode="BW" pk="8796094169122"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/BW" />
+	<country isocode="BY" pk="8796094201890"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/BY" />
+	<country isocode="BZ" pk="8796094234658"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/BZ" />
+	<country isocode="CA" pk="8796094267426"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/CA" />
+	<country isocode="CC" pk="8796094300194"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/CC" />
+	<country isocode="CD" pk="8796094332962"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/CD" />
+	<country isocode="CF" pk="8796094365730"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/CF" />
+	<country isocode="CG" pk="8796094398498"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/CG" />
+	<country isocode="CH" pk="8796094431266"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/CH" />
+	<country isocode="CI" pk="8796094464034"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/CI" />
+	<country isocode="CK" pk="8796094496802"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/CK" />
+	<country isocode="CL" pk="8796094529570"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/CL" />
+	<country isocode="CM" pk="8796094562338"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/CM" />
+	<country isocode="CN" pk="8796094595106"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/CN" />
+	<country isocode="CO" pk="8796094627874"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/CO" />
+	<country isocode="CR" pk="8796094660642"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/CR" />
+	<country isocode="CU" pk="8796094693410"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/CU" />
+	<country isocode="CV" pk="8796094726178"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/CV" />
+	<country isocode="CW" pk="8796094758946"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/CW" />
+	<country isocode="CX" pk="8796094791714"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/CX" />
+	<country isocode="CY" pk="8796094824482"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/CY" />
+	<country isocode="CZ" pk="8796094857250"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/CZ" />
+	<country isocode="DE" pk="8796094890018"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/DE" />
+	<country isocode="DJ" pk="8796094922786"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/DJ" />
+	<country isocode="DK" pk="8796094955554"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/DK" />
+	<country isocode="DM" pk="8796094988322"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/DM" />
+	<country isocode="DO" pk="8796095021090"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/DO" />
+	<country isocode="DZ" pk="8796095053858"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/DZ" />
+	<country isocode="EC" pk="8796095086626"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/EC" />
+	<country isocode="EE" pk="8796095119394"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/EE" />
+	<country isocode="EG" pk="8796095152162"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/EG" />
+	<country isocode="EH" pk="8796095184930"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/EH" />
+	<country isocode="ER" pk="8796095217698"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/ER" />
+	<country isocode="ES" pk="8796095250466"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/ES" />
+	<country isocode="ET" pk="8796095283234"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/ET" />
+	<country isocode="FI" pk="8796095316002"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/FI" />
+	<country isocode="FJ" pk="8796095348770"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/FJ" />
+	<country isocode="FK" pk="8796095381538"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/FK" />
+	<country isocode="FM" pk="8796095414306"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/FM" />
+	<country isocode="FO" pk="8796095447074"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/FO" />
+	<country isocode="FR" pk="8796095479842"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/FR" />
+	<country isocode="GA" pk="8796095512610"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/GA" />
+	<country isocode="GB" pk="8796095545378"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/GB" />
+	<country isocode="GD" pk="8796095578146"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/GD" />
+	<country isocode="GE" pk="8796095610914"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/GE" />
+	<country isocode="GF" pk="8796095643682"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/GF" />
+	<country isocode="GG" pk="8796095676450"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/GG" />
+	<country isocode="GH" pk="8796095709218"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/GH" />
+	<country isocode="GI" pk="8796095741986"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/GI" />
+	<country isocode="GL" pk="8796095774754"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/GL" />
+	<country isocode="GM" pk="8796095807522"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/GM" />
+	<country isocode="GN" pk="8796095840290"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/GN" />
+	<country isocode="GP" pk="8796095873058"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/GP" />
+	<country isocode="GQ" pk="8796095905826"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/GQ" />
+	<country isocode="GR" pk="8796095938594"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/GR" />
+	<country isocode="GS" pk="8796095971362"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/GS" />
+	<country isocode="GT" pk="8796096004130"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/GT" />
+	<country isocode="GU" pk="8796096036898"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/GU" />
+	<country isocode="GW" pk="8796096069666"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/GW" />
+	<country isocode="GY" pk="8796096102434"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/GY" />
+	<country isocode="HK" pk="8796096135202"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/HK" />
+	<country isocode="HM" pk="8796096167970"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/HM" />
+	<country isocode="HN" pk="8796096200738"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/HN" />
+	<country isocode="HR" pk="8796096233506"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/HR" />
+	<country isocode="HT" pk="8796096266274"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/HT" />
+	<country isocode="HU" pk="8796096299042"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/HU" />
+	<country isocode="ID" pk="8796096331810"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/ID" />
+	<country isocode="IE" pk="8796096364578"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/IE" />
+	<country isocode="IL" pk="8796096397346"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/IL" />
+	<country isocode="IM" pk="8796096430114"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/IM" />
+	<country isocode="IN" pk="8796096462882"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/IN" />
+	<country isocode="IO" pk="8796096495650"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/IO" />
+	<country isocode="IQ" pk="8796096528418"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/IQ" />
+	<country isocode="IR" pk="8796096561186"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/IR" />
+	<country isocode="IS" pk="8796096593954"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/IS" />
+	<country isocode="IT" pk="8796096626722"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/IT" />
+	<country isocode="JE" pk="8796096659490"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/JE" />
+	<country isocode="JM" pk="8796096692258"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/JM" />
+	<country isocode="JO" pk="8796096725026"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/JO" />
+	<country isocode="JP" pk="8796096757794"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/JP" />
+	<country isocode="KE" pk="8796096790562"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/KE" />
+	<country isocode="KG" pk="8796096823330"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/KG" />
+	<country isocode="KH" pk="8796096856098"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/KH" />
+	<country isocode="KI" pk="8796096888866"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/KI" />
+	<country isocode="KM" pk="8796096921634"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/KM" />
+	<country isocode="KN" pk="8796096954402"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/KN" />
+	<country isocode="KP" pk="8796096987170"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/KP" />
+	<country isocode="KR" pk="8796097019938"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/KR" />
+	<country isocode="KW" pk="8796097052706"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/KW" />
+	<country isocode="KY" pk="8796097085474"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/KY" />
+	<country isocode="KZ" pk="8796097118242"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/KZ" />
+	<country isocode="LA" pk="8796097151010"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/LA" />
+	<country isocode="LB" pk="8796097183778"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/LB" />
+	<country isocode="LC" pk="8796097216546"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/LC" />
+	<country isocode="LI" pk="8796097249314"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/LI" />
+	<country isocode="LK" pk="8796097282082"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/LK" />
+	<country isocode="LR" pk="8796097314850"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/LR" />
+	<country isocode="LS" pk="8796097347618"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/LS" />
+	<country isocode="LT" pk="8796097380386"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/LT" />
+	<country isocode="LU" pk="8796097413154"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/LU" />
+	<country isocode="LV" pk="8796097445922"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/LV" />
+	<country isocode="LY" pk="8796097478690"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/LY" />
+	<country isocode="MA" pk="8796097511458"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/MA" />
+	<country isocode="MC" pk="8796097544226"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/MC" />
+	<country isocode="MD" pk="8796097576994"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/MD" />
+	<country isocode="ME" pk="8796097609762"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/ME" />
+	<country isocode="MF" pk="8796097642530"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/MF" />
+	<country isocode="MG" pk="8796097675298"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/MG" />
+	<country isocode="MH" pk="8796097708066"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/MH" />
+	<country isocode="MK" pk="8796097740834"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/MK" />
+	<country isocode="ML" pk="8796097773602"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/ML" />
+	<country isocode="MM" pk="8796097806370"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/MM" />
+	<country isocode="MN" pk="8796097839138"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/MN" />
+	<country isocode="MO" pk="8796097871906"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/MO" />
+	<country isocode="MP" pk="8796097904674"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/MP" />
+	<country isocode="MQ" pk="8796097937442"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/MQ" />
+	<country isocode="MR" pk="8796097970210"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/MR" />
+	<country isocode="MS" pk="8796098002978"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/MS" />
+	<country isocode="MT" pk="8796098035746"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/MT" />
+	<country isocode="MU" pk="8796098068514"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/MU" />
+	<country isocode="MV" pk="8796098101282"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/MV" />
+	<country isocode="MW" pk="8796098134050"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/MW" />
+	<country isocode="MX" pk="8796098166818"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/MX" />
+	<country isocode="MY" pk="8796098199586"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/MY" />
+	<country isocode="MZ" pk="8796098232354"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/MZ" />
+	<country isocode="NA" pk="8796098265122"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/NA" />
+	<country isocode="NC" pk="8796098297890"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/NC" />
+	<country isocode="NE" pk="8796098330658"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/NE" />
+	<country isocode="NF" pk="8796098363426"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/NF" />
+	<country isocode="NG" pk="8796098396194"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/NG" />
+	<country isocode="NI" pk="8796098428962"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/NI" />
+	<country isocode="NL" pk="8796098461730"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/NL" />
+	<country isocode="NO" pk="8796098494498"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/NO" />
+	<country isocode="NP" pk="8796098527266"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/NP" />
+	<country isocode="NR" pk="8796098560034"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/NR" />
+	<country isocode="NU" pk="8796098592802"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/NU" />
+	<country isocode="NZ" pk="8796098625570"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/NZ" />
+	<country isocode="OM" pk="8796098658338"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/OM" />
+	<country isocode="PA" pk="8796098691106"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/PA" />
+	<country isocode="PE" pk="8796098723874"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/PE" />
+	<country isocode="PF" pk="8796098756642"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/PF" />
+	<country isocode="PG" pk="8796098789410"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/PG" />
+	<country isocode="PH" pk="8796098822178"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/PH" />
+	<country isocode="PK" pk="8796098854946"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/PK" />
+	<country isocode="PL" pk="8796098887714"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/PL" />
+	<country isocode="PM" pk="8796098920482"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/PM" />
+	<country isocode="PN" pk="8796098953250"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/PN" />
+	<country isocode="PR" pk="8796098986018"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/PR" />
+	<country isocode="PS" pk="8796099018786"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/PS" />
+	<country isocode="PT" pk="8796099051554"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/PT" />
+	<country isocode="PW" pk="8796099084322"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/PW" />
+	<country isocode="PY" pk="8796099117090"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/PY" />
+	<country isocode="QA" pk="8796099149858"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/QA" />
+	<country isocode="RE" pk="8796099182626"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/RE" />
+	<country isocode="RO" pk="8796099215394"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/RO" />
+	<country isocode="RS" pk="8796099248162"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/RS" />
+	<country isocode="RU" pk="8796099280930"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/RU" />
+	<country isocode="RW" pk="8796099313698"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/RW" />
+	<country isocode="SA" pk="8796099346466"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/SA" />
+	<country isocode="SB" pk="8796099379234"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/SB" />
+	<country isocode="SC" pk="8796099412002"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/SC" />
+	<country isocode="SD" pk="8796099444770"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/SD" />
+	<country isocode="SE" pk="8796099477538"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/SE" />
+	<country isocode="SG" pk="8796099510306"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/SG" />
+	<country isocode="SH" pk="8796099543074"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/SH" />
+	<country isocode="SI" pk="8796099575842"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/SI" />
+	<country isocode="SJ" pk="8796099608610"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/SJ" />
+	<country isocode="SK" pk="8796099641378"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/SK" />
+	<country isocode="SL" pk="8796099674146"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/SL" />
+	<country isocode="SM" pk="8796099706914"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/SM" />
+	<country isocode="SN" pk="8796099739682"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/SN" />
+	<country isocode="SO" pk="8796099772450"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/SO" />
+	<country isocode="SR" pk="8796099805218"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/SR" />
+	<country isocode="ST" pk="8796099837986"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/ST" />
+	<country isocode="SV" pk="8796099870754"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/SV" />
+	<country isocode="SX" pk="8796099903522"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/SX" />
+	<country isocode="SY" pk="8796099936290"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/SY" />
+	<country isocode="SZ" pk="8796099969058"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/SZ" />
+	<country isocode="TC" pk="8796100001826"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/TC" />
+	<country isocode="TD" pk="8796100034594"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/TD" />
+	<country isocode="TF" pk="8796100067362"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/TF" />
+	<country isocode="TG" pk="8796100100130"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/TG" />
+	<country isocode="TH" pk="8796100132898"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/TH" />
+	<country isocode="TJ" pk="8796100165666"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/TJ" />
+	<country isocode="TK" pk="8796100198434"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/TK" />
+	<country isocode="TL" pk="8796100231202"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/TL" />
+	<country isocode="TM" pk="8796100263970"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/TM" />
+	<country isocode="TN" pk="8796100296738"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/TN" />
+	<country isocode="TO" pk="8796100329506"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/TO" />
+	<country isocode="TR" pk="8796100362274"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/TR" />
+	<country isocode="TT" pk="8796100395042"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/TT" />
+	<country isocode="TV" pk="8796100427810"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/TV" />
+	<country isocode="TW" pk="8796100460578"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/TW" />
+	<country isocode="TZ" pk="8796100493346"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/TZ" />
+	<country isocode="UA" pk="8796100526114"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/UA" />
+	<country isocode="UG" pk="8796100558882"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/UG" />
+	<country isocode="UM" pk="8796100591650"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/UM" />
+	<country isocode="US" pk="8796100624418"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/US" />
+	<country isocode="UY" pk="8796100657186"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/UY" />
+	<country isocode="UZ" pk="8796100689954"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/UZ" />
+	<country isocode="VA" pk="8796100722722"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/VA" />
+	<country isocode="VC" pk="8796100755490"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/VC" />
+	<country isocode="VE" pk="8796100788258"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/VE" />
+	<country isocode="VG" pk="8796100821026"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/VG" />
+	<country isocode="VI" pk="8796100853794"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/VI" />
+	<country isocode="VN" pk="8796100886562"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/VN" />
+	<country isocode="VU" pk="8796100919330"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/VU" />
+	<country isocode="WF" pk="8796100952098"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/WF" />
+	<country isocode="WS" pk="8796100984866"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/WS" />
+	<country isocode="YE" pk="8796101017634"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/YE" />
+	<country isocode="YT" pk="8796101050402"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/YT" />
+	<country isocode="ZA" pk="8796101083170"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/ZA" />
+	<country isocode="ZM" pk="8796101115938"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/ZM" />
+	<country isocode="ZW" pk="8796101148706"
+		uri="http://37.153.99.110:9001/ws410/rest/countries/ZW" />
+</countries>

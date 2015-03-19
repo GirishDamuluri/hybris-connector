@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<carts uri="http://www.cloudelectronics.com/ws410/rest/carts">
+  <cart code="00000000" pk="8796093055019" uri="http://www.cloudelectronics.com/ws410/rest/carts/00000000"/>
+  <cart code="00001000" pk="8796125823019" uri="http://www.cloudelectronics.com/ws410/rest/carts/00001000"/>
+</carts>
