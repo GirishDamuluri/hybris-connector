@@ -4,11 +4,9 @@
 package org.mule.modules.hybris;
 
 import java.io.IOException;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.mule.api.ConnectionException;
-import org.mule.api.MuleException;
 import org.mule.api.annotations.Category;
 import org.mule.api.annotations.Configurable;
 import org.mule.api.annotations.Connect;
@@ -46,6 +44,7 @@ import org.mule.modules.hybris.model.RegionDTO;
 import org.mule.modules.hybris.model.RegionsDTO;
 import org.mule.modules.hybris.model.UnitDTO;
 import org.mule.modules.hybris.model.UnitsDTO;
+import org.mule.modules.hybris.paging.HybrisPagingDelegate;
 import org.mule.streaming.PagingConfiguration;
 import org.mule.streaming.PagingDelegate;
 
@@ -131,42 +130,13 @@ public class HybrisConnector
     public PagingDelegate<CatalogDTO> getCatalogs(final PagingConfiguration pagingConfiguration)
             throws IOException
     {
-        return new PagingDelegate<CatalogDTO>() {
-            private int start = 0;
-
+        return new HybrisPagingDelegate<CatalogDTO>() {
             @Override
-            public List<CatalogDTO> getPage()
+            public List<CatalogDTO> doGetPage() throws IOException
             {
-                List<CatalogDTO> entriesResult = new LinkedList<CatalogDTO>();
-                try
-                {
-                    CatalogsDTO catalogsDTO = client.getCatalogs(
-                            pagingConfiguration.getFetchSize(), this.start);
-                    if (catalogsDTO.getCatalog() != null)
-                    {
-                        for (CatalogDTO entry : catalogsDTO.getCatalog())
-                        {
-                            entriesResult.add(entry);
-                        }
-                        this.start += 1;
-                    }
-                } catch (Exception e)
-                {
-                    throw new RuntimeException(e);
-                }
-
-                return entriesResult;
-            }
-
-            @Override
-            public int getTotalResults()
-            {
-                return -1;
-            }
-
-            @Override
-            public void close() throws MuleException
-            {
+                CatalogsDTO catalogsDTO = client.getCatalogs(pagingConfiguration.getFetchSize(),
+                        this.start);
+                return catalogsDTO.getCatalog();
             }
         };
     }
@@ -414,7 +384,7 @@ public class HybrisConnector
     {
         this.client.deleteProduct(catalogId, version, productCode);
     }
-    
+
     /**
      * Get Units
      * 
@@ -433,42 +403,12 @@ public class HybrisConnector
     public PagingDelegate<UnitDTO> getUnits(final PagingConfiguration pagingConfiguration)
             throws IOException
     {
-        return new PagingDelegate<UnitDTO>() {
-            private int start = 0;
-
+        return new HybrisPagingDelegate<UnitDTO>() {
             @Override
-            public List<UnitDTO> getPage()
+            public List<UnitDTO> doGetPage() throws IOException
             {
-                List<UnitDTO> entriesResult = new LinkedList<UnitDTO>();
-                try
-                {
-                    UnitsDTO unitsDTO = client.getUnits(
-                            pagingConfiguration.getFetchSize(), this.start);
-                    if (unitsDTO.getUnit() != null)
-                    {
-                        for (UnitDTO entry : unitsDTO.getUnit())
-                        {
-                            entriesResult.add(entry);
-                        }
-                        this.start += 1;
-                    }
-                } catch (Exception e)
-                {
-                    throw new RuntimeException(e);
-                }
-
-                return entriesResult;
-            }
-
-            @Override
-            public int getTotalResults()
-            {
-                return -1;
-            }
-
-            @Override
-            public void close() throws MuleException
-            {
+                UnitsDTO unitsDTO = client.getUnits(pagingConfiguration.getFetchSize(), this.start);
+                return unitsDTO.getUnit();
             }
         };
     }
@@ -527,7 +467,7 @@ public class HybrisConnector
     {
         this.client.deleteUnit(unitCode);
     }
-    
+
     /**
      * Get Currencies
      * 
@@ -546,42 +486,13 @@ public class HybrisConnector
     public PagingDelegate<CurrencyDTO> getCurrencies(final PagingConfiguration pagingConfiguration)
             throws IOException
     {
-        return new PagingDelegate<CurrencyDTO>() {
-            private int start = 0;
-
+        return new HybrisPagingDelegate<CurrencyDTO>() {
             @Override
-            public List<CurrencyDTO> getPage()
+            public List<CurrencyDTO> doGetPage() throws IOException
             {
-                List<CurrencyDTO> entriesResult = new LinkedList<CurrencyDTO>();
-                try
-                {
-                    CurrenciesDTO currenciesDto = client.getCurrencies(
-                            pagingConfiguration.getFetchSize(), this.start);
-                    if (currenciesDto.getCurrency() != null)
-                    {
-                        for (CurrencyDTO entry : currenciesDto.getCurrency())
-                        {
-                            entriesResult.add(entry);
-                        }
-                        this.start += 1;
-                    }
-                } catch (Exception e)
-                {
-                    throw new RuntimeException(e);
-                }
-
-                return entriesResult;
-            }
-
-            @Override
-            public int getTotalResults()
-            {
-                return -1;
-            }
-
-            @Override
-            public void close() throws MuleException
-            {
+                CurrenciesDTO currenciesDto = client.getCurrencies(
+                        pagingConfiguration.getFetchSize(), start);
+                return currenciesDto.getCurrency();
             }
         };
     }
@@ -642,7 +553,7 @@ public class HybrisConnector
     {
         this.client.deleteCurrency(isocode);
     }
-    
+
     /**
      * Get Discounts
      * 
@@ -661,42 +572,13 @@ public class HybrisConnector
     public PagingDelegate<DiscountDTO> getDiscounts(final PagingConfiguration pagingConfiguration)
             throws IOException
     {
-        return new PagingDelegate<DiscountDTO>() {
-            private int start = 0;
-
+        return new HybrisPagingDelegate<DiscountDTO>() {
             @Override
-            public List<DiscountDTO> getPage()
+            public List<DiscountDTO> doGetPage() throws IOException
             {
-                List<DiscountDTO> entriesResult = new LinkedList<DiscountDTO>();
-                try
-                {
-                    DiscountsDTO discountsDto = client.getDiscounts(
-                            pagingConfiguration.getFetchSize(), this.start);
-                    if (discountsDto.getDiscount() != null)
-                    {
-                        for (DiscountDTO entry : discountsDto.getDiscount())
-                        {
-                            entriesResult.add(entry);
-                        }
-                        this.start += 1;
-                    }
-                } catch (Exception e)
-                {
-                    throw new RuntimeException(e);
-                }
-
-                return entriesResult;
-            }
-
-            @Override
-            public int getTotalResults()
-            {
-                return -1;
-            }
-
-            @Override
-            public void close() throws MuleException
-            {
+                DiscountsDTO discountsDto = client.getDiscounts(pagingConfiguration.getFetchSize(),
+                        this.start);
+                return discountsDto.getDiscount();
             }
         };
     }
@@ -757,7 +639,7 @@ public class HybrisConnector
     {
         this.client.deleteDiscount(code);
     }
-    
+
     /**
      * Get Carts
      * 
@@ -776,42 +658,12 @@ public class HybrisConnector
     public PagingDelegate<CartDTO> getCarts(final PagingConfiguration pagingConfiguration)
             throws IOException
     {
-        return new PagingDelegate<CartDTO>() {
-            private int start = 0;
-
+        return new HybrisPagingDelegate<CartDTO>() {
             @Override
-            public List<CartDTO> getPage()
+            public List<CartDTO> doGetPage() throws IOException
             {
-                List<CartDTO> entriesResult = new LinkedList<CartDTO>();
-                try
-                {
-                    CartsDTO cartsDto = client.getCarts(
-                            pagingConfiguration.getFetchSize(), this.start);
-                    if (cartsDto.getCart() != null)
-                    {
-                        for (CartDTO entry : cartsDto.getCart())
-                        {
-                            entriesResult.add(entry);
-                        }
-                        this.start += 1;
-                    }
-                } catch (Exception e)
-                {
-                    throw new RuntimeException(e);
-                }
-
-                return entriesResult;
-            }
-
-            @Override
-            public int getTotalResults()
-            {
-                return -1;
-            }
-
-            @Override
-            public void close() throws MuleException
-            {
+                CartsDTO cartsDto = client.getCarts(pagingConfiguration.getFetchSize(), this.start);
+                return cartsDto.getCart();
             }
         };
     }
@@ -871,8 +723,8 @@ public class HybrisConnector
     public void deleteCart(String code) throws IOException
     {
         this.client.deleteCart(code);
-    } 
-    
+    }
+
     /**
      * Get CartEntries
      * 
@@ -891,42 +743,13 @@ public class HybrisConnector
     public PagingDelegate<CartEntryDTO> getCartEntries(final PagingConfiguration pagingConfiguration)
             throws IOException
     {
-        return new PagingDelegate<CartEntryDTO>() {
-            private int start = 0;
-
+        return new HybrisPagingDelegate<CartEntryDTO>() {
             @Override
-            public List<CartEntryDTO> getPage()
+            public List<CartEntryDTO> doGetPage() throws IOException
             {
-                List<CartEntryDTO> entriesResult = new LinkedList<CartEntryDTO>();
-                try
-                {
-                    CartEntriesDTO cartEntriesDto = client.getCartEntries(
-                            pagingConfiguration.getFetchSize(), this.start);
-                    if (cartEntriesDto.getCartentry() != null)
-                    {
-                        for (CartEntryDTO entry : cartEntriesDto.getCartentry())
-                        {
-                            entriesResult.add(entry);
-                        }
-                        this.start += 1;
-                    }
-                } catch (Exception e)
-                {
-                    throw new RuntimeException(e);
-                }
-
-                return entriesResult;
-            }
-
-            @Override
-            public int getTotalResults()
-            {
-                return -1;
-            }
-
-            @Override
-            public void close() throws MuleException
-            {
+                CartEntriesDTO cartEntriesDto = client.getCartEntries(
+                        pagingConfiguration.getFetchSize(), this.start);
+                return cartEntriesDto.getCartentry();
             }
         };
     }
@@ -987,7 +810,7 @@ public class HybrisConnector
     {
         this.client.deleteCartEntry(pk);
     }
-    
+
     /**
      * Get Countries
      * 
@@ -1006,46 +829,17 @@ public class HybrisConnector
     public PagingDelegate<CountryDTO> getCountries(final PagingConfiguration pagingConfiguration)
             throws IOException
     {
-        return new PagingDelegate<CountryDTO>() {
-            private int start = 0;
-
+        return new HybrisPagingDelegate<CountryDTO>() {
             @Override
-            public List<CountryDTO> getPage()
+            public List<CountryDTO> doGetPage() throws IOException
             {
-                List<CountryDTO> entriesResult = new LinkedList<CountryDTO>();
-                try
-                {
-                    CountriesDTO countriesDto = client.getCountries(
-                            pagingConfiguration.getFetchSize(), this.start);
-                    if (countriesDto.getCountry() != null)
-                    {
-                        for (CountryDTO entry : countriesDto.getCountry())
-                        {
-                            entriesResult.add(entry);
-                        }
-                        this.start += 1;
-                    }
-                } catch (Exception e)
-                {
-                    throw new RuntimeException(e);
-                }
-
-                return entriesResult;
-            }
-
-            @Override
-            public int getTotalResults()
-            {
-                return -1;
-            }
-
-            @Override
-            public void close() throws MuleException
-            {
+                CountriesDTO countriesDto = client.getCountries(pagingConfiguration.getFetchSize(),
+                        this.start);
+                return countriesDto.getCountry();
             }
         };
     }
-    
+
     /**
      * Get PaymentModes
      * 
@@ -1061,45 +855,16 @@ public class HybrisConnector
     @Processor
     @Category(name = "Ordering Process", description = "A set of calls for the Ordering Process resources.")
     @Paged
-    public PagingDelegate<PaymentModeDTO> getPaymentModes(final PagingConfiguration pagingConfiguration)
-            throws IOException
+    public PagingDelegate<PaymentModeDTO> getPaymentModes(
+            final PagingConfiguration pagingConfiguration) throws IOException
     {
-        return new PagingDelegate<PaymentModeDTO>() {
-            private int start = 0;
-
+        return new HybrisPagingDelegate<PaymentModeDTO>() {
             @Override
-            public List<PaymentModeDTO> getPage()
+            public List<PaymentModeDTO> doGetPage() throws IOException
             {
-                List<PaymentModeDTO> entriesResult = new LinkedList<PaymentModeDTO>();
-                try
-                {
-                    PaymentModesDTO paymentModesDto = client.getPaymentModes(
-                            pagingConfiguration.getFetchSize(), this.start);
-                    if (paymentModesDto.getPaymentmode() != null)
-                    {
-                        for (PaymentModeDTO entry : paymentModesDto.getPaymentmode())
-                        {
-                            entriesResult.add(entry);
-                        }
-                        this.start += 1;
-                    }
-                } catch (Exception e)
-                {
-                    throw new RuntimeException(e);
-                }
-
-                return entriesResult;
-            }
-
-            @Override
-            public int getTotalResults()
-            {
-                return -1;
-            }
-
-            @Override
-            public void close() throws MuleException
-            {
+                PaymentModesDTO paymentModesDto = client.getPaymentModes(
+                        pagingConfiguration.getFetchSize(), this.start);
+                return paymentModesDto.getPaymentmode();
             }
         };
     }
@@ -1217,7 +982,7 @@ public class HybrisConnector
     {
         this.client.deleteCountry(isocode);
     }
-    
+
     /**
      * Get Regions
      * 
@@ -1236,42 +1001,13 @@ public class HybrisConnector
     public PagingDelegate<RegionDTO> getRegions(final PagingConfiguration pagingConfiguration)
             throws IOException
     {
-        return new PagingDelegate<RegionDTO>() {
-            private int start = 0;
-
+        return new HybrisPagingDelegate<RegionDTO>() {
             @Override
-            public List<RegionDTO> getPage()
+            public List<RegionDTO> doGetPage() throws IOException
             {
-                List<RegionDTO> entriesResult = new LinkedList<RegionDTO>();
-                try
-                {
-                    RegionsDTO regionsDto = client.getRegions(
-                            pagingConfiguration.getFetchSize(), this.start);
-                    if (regionsDto.getRegion() != null)
-                    {
-                        for (RegionDTO entry : regionsDto.getRegion())
-                        {
-                            entriesResult.add(entry);
-                        }
-                        this.start += 1;
-                    }
-                } catch (Exception e)
-                {
-                    throw new RuntimeException(e);
-                }
-
-                return entriesResult;
-            }
-
-            @Override
-            public int getTotalResults()
-            {
-                return -1;
-            }
-
-            @Override
-            public void close() throws MuleException
-            {
+                RegionsDTO regionsDto = client.getRegions(pagingConfiguration.getFetchSize(),
+                        this.start);
+                return regionsDto.getRegion();
             }
         };
     }
@@ -1332,7 +1068,7 @@ public class HybrisConnector
     {
         this.client.deleteRegion(isocode);
     }
-    
+
     /**
      * Get Languages
      * 
@@ -1351,42 +1087,13 @@ public class HybrisConnector
     public PagingDelegate<LanguageDTO> getLanguages(final PagingConfiguration pagingConfiguration)
             throws IOException
     {
-        return new PagingDelegate<LanguageDTO>() {
-            private int start = 0;
-
+        return new HybrisPagingDelegate<LanguageDTO>() {
             @Override
-            public List<LanguageDTO> getPage()
+            public List<LanguageDTO> doGetPage() throws IOException
             {
-                List<LanguageDTO> entriesResult = new LinkedList<LanguageDTO>();
-                try
-                {
-                    LanguagesDTO languagesDto = client.getLanguages(
-                            pagingConfiguration.getFetchSize(), this.start);
-                    if (languagesDto.getLanguage() != null)
-                    {
-                        for (LanguageDTO entry : languagesDto.getLanguage())
-                        {
-                            entriesResult.add(entry);
-                        }
-                        this.start += 1;
-                    }
-                } catch (Exception e)
-                {
-                    throw new RuntimeException(e);
-                }
-
-                return entriesResult;
-            }
-
-            @Override
-            public int getTotalResults()
-            {
-                return -1;
-            }
-
-            @Override
-            public void close() throws MuleException
-            {
+                LanguagesDTO languagesDto = client.getLanguages(pagingConfiguration.getFetchSize(),
+                        this.start);
+                return languagesDto.getLanguage();
             }
         };
     }
@@ -1447,7 +1154,7 @@ public class HybrisConnector
     {
         this.client.deleteLanguage(isocode);
     }
-    
+
     public String getEndpointUrl()
     {
         return endpointUrl;
