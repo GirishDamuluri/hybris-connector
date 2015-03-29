@@ -2,32 +2,12 @@ package org.mule.modules.hybris.client;
 
 import java.util.Arrays;
 
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.WebResource;
+import javax.ws.rs.core.Response;
 
 public class ClientUtil
 {
-
-    public static ClientResponse execute(String httpMethod, WebResource resource)
-    {
-        return execute(httpMethod, resource.getRequestBuilder());
-    }
-
-    public static ClientResponse execute(String httpMethod, WebResource.Builder resourceBuilder)
-    {
-        try
-        {
-            ClientResponse clientResponse = resourceBuilder
-                    .method(httpMethod, ClientResponse.class);
-            return clientResponse;
-        } catch (RuntimeException e)
-        {
-            throw new HybrisClientException("Exception trying to execute Client ", e);
-        }
-    }
-
-    public static <T> T validateAndParseResponse(ClientResponse clientResponse,
-            Class<T> typeToReturn, Integer... expectedStatus) throws HybrisAPIException
+    public static <T> T validateAndParseResponse(Response clientResponse, Class<T> typeToReturn,
+            Integer... expectedStatus) throws HybrisAPIException
     {
         if (responseValid(clientResponse, expectedStatus))
         {
@@ -40,17 +20,17 @@ public class ClientUtil
         }
     }
 
-    private static boolean responseValid(ClientResponse clientResponse, Integer... expectedStatus)
+    private static boolean responseValid(Response clientResponse, Integer... expectedStatus)
     {
         return Arrays.asList(expectedStatus).contains(clientResponse.getStatus());
     }
 
-    private static <T> T parseResponse(ClientResponse clientResponse, Class<T> typeToReturn)
+    private static <T> T parseResponse(Response clientResponse, Class<T> typeToReturn)
             throws HybrisAPIException
     {
         try
         {
-            return clientResponse.getEntity(typeToReturn);
+            return clientResponse.readEntity(typeToReturn);
         } catch (Exception e)
         {
             throw new HybrisAPIException("Error parsing response", e);

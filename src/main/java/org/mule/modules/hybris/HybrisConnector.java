@@ -6,21 +6,11 @@ package org.mule.modules.hybris;
 import java.io.IOException;
 import java.util.List;
 
-import org.mule.api.ConnectionException;
 import org.mule.api.annotations.Category;
-import org.mule.api.annotations.Configurable;
-import org.mule.api.annotations.Connect;
-import org.mule.api.annotations.ConnectionIdentifier;
+import org.mule.api.annotations.ConnectionStrategy;
 import org.mule.api.annotations.Connector;
-import org.mule.api.annotations.Disconnect;
 import org.mule.api.annotations.Paged;
 import org.mule.api.annotations.Processor;
-import org.mule.api.annotations.ValidateConnection;
-import org.mule.api.annotations.param.ConnectionKey;
-import org.mule.api.annotations.param.Default;
-import org.mule.api.annotations.param.Optional;
-import org.mule.modules.hybris.client.HybrisClient;
-import org.mule.modules.hybris.client.HybrisClientFactory;
 import org.mule.modules.hybris.model.CartDTO;
 import org.mule.modules.hybris.model.CartEntriesDTO;
 import org.mule.modules.hybris.model.CartEntryDTO;
@@ -46,71 +36,18 @@ import org.mule.modules.hybris.model.UnitDTO;
 import org.mule.modules.hybris.model.UnitsDTO;
 import org.mule.modules.hybris.paging.HybrisPagingDelegate;
 import org.mule.streaming.PagingConfiguration;
-import org.mule.streaming.PagingDelegate;
+import org.mule.streaming.ProviderAwarePagingDelegate;
 
 /**
  * Hybris Cloud Connector
  * 
- * @author MuleSoft, Inc.
+ * @author ryandcarter.
  */
-@Connector(name = "hybris", schemaVersion = "1.0-SNAPSHOT")
+@Connector(name = "hybris", friendlyName = "hybris", schemaVersion = "1.0-SNAPSHOT")
 public class HybrisConnector
 {
-
-    private HybrisClient client;
-
-    /**
-     * Endpoint URL
-     */
-    @Configurable
-    @Optional
-    @Default(value = " http://localhost:9001/ws410/rest")
-    private String endpointUrl;
-
-    /**
-     * Connect
-     * 
-     * @param username
-     *            Hybris username
-     * @param password
-     *            Hybris password
-     * @throws ConnectionException
-     */
-    @Connect
-    public void connect(@ConnectionKey String username, String password) throws ConnectionException
-    {
-        this.client = HybrisClientFactory.getClient(this.endpointUrl);
-        this.client.login(username, password);
-    }
-
-    /**
-     * Disconnect
-     * 
-     * @throws ConnectionException
-     */
-    @Disconnect
-    public void disconnect() throws ConnectionException
-    {
-        this.client.logout();
-    }
-
-    /**
-     * Are we connected
-     */
-    @ValidateConnection
-    public boolean isConnected()
-    {
-        return this.client != null && this.client.isConnected();
-    }
-
-    /**
-     * Are we connected
-     */
-    @ConnectionIdentifier
-    public String connectionId()
-    {
-        return this.client.connectionId();
-    }
+    @ConnectionStrategy
+    private HybrisBasicConnectionStrategy connection;
 
     /**
      * Get Catalogs
@@ -127,15 +64,15 @@ public class HybrisConnector
     @Processor
     @Category(name = "Catalog Structure and Products", description = "A set of calls for the Catalog Structure and Products resources.")
     @Paged
-    public PagingDelegate<CatalogDTO> getCatalogs(final PagingConfiguration pagingConfiguration)
-            throws IOException
+    public ProviderAwarePagingDelegate<CatalogDTO, HybrisConnector> getCatalogs(
+            final PagingConfiguration pagingConfiguration) throws IOException
     {
         return new HybrisPagingDelegate<CatalogDTO>() {
             @Override
-            public List<CatalogDTO> doGetPage() throws IOException
+            public List<CatalogDTO> doGetPage(HybrisConnector connector) throws IOException
             {
-                CatalogsDTO catalogsDTO = client.getCatalogs(pagingConfiguration.getFetchSize(),
-                        this.start);
+                CatalogsDTO catalogsDTO = connection.getClient().getCatalogs(
+                        pagingConfiguration.getFetchSize(), this.start);
                 return catalogsDTO.getCatalog();
             }
         };
@@ -157,7 +94,7 @@ public class HybrisConnector
     @Category(name = "Catalog Structure and Products", description = "A set of calls for the Catalog Structure and Products resources.")
     public CatalogDTO getCatalog(String catalogId) throws IOException
     {
-        return this.client.getCatalog(catalogId);
+        return connection.getClient().getCatalog(catalogId);
     }
 
     /**
@@ -175,7 +112,7 @@ public class HybrisConnector
     @Category(name = "Catalog Structure and Products", description = "A set of calls for the Catalog Structure and Products resources.")
     public void upsertCatalog(CatalogDTO catalog) throws IOException
     {
-        this.client.upsertCatalog(catalog);
+        connection.getClient().upsertCatalog(catalog);
     }
 
     /**
@@ -193,7 +130,7 @@ public class HybrisConnector
     @Category(name = "Catalog Structure and Products", description = "A set of calls for the Catalog Structure and Products resources.")
     public void deleteCatalog(String catalogId) throws IOException
     {
-        this.client.deleteCatalog(catalogId);
+        connection.getClient().deleteCatalog(catalogId);
     }
 
     /**
@@ -214,7 +151,7 @@ public class HybrisConnector
     @Category(name = "Catalog Structure and Products", description = "A set of calls for the Catalog Structure and Products resources.")
     public CatalogVersionDTO getCatalogVersion(String catalogId, String version) throws IOException
     {
-        return this.client.getCatalogVersion(catalogId, version);
+        return connection.getClient().getCatalogVersion(catalogId, version);
     }
 
     /**
@@ -232,7 +169,7 @@ public class HybrisConnector
     @Category(name = "Catalog Structure and Products", description = "A set of calls for the Catalog Structure and Products resources.")
     public void upsertCatalogVersion(CatalogVersionDTO catalogVersion) throws IOException
     {
-        this.client.upsertCatalogVersion(catalogVersion);
+        connection.getClient().upsertCatalogVersion(catalogVersion);
     }
 
     /**
@@ -252,7 +189,7 @@ public class HybrisConnector
     @Category(name = "Catalog Structure and Products", description = "A set of calls for the Catalog Structure and Products resources.")
     public void deleteCatalogVersion(String catalogId, String version) throws IOException
     {
-        this.client.deleteCatalogVersion(catalogId, version);
+        connection.getClient().deleteCatalogVersion(catalogId, version);
     }
 
     /**
@@ -276,7 +213,7 @@ public class HybrisConnector
     public CategoryDTO getCategory(String catalogId, String version, String categoryCode)
             throws IOException
     {
-        return this.client.getCategory(catalogId, version, categoryCode);
+        return connection.getClient().getCategory(catalogId, version, categoryCode);
     }
 
     /**
@@ -294,7 +231,7 @@ public class HybrisConnector
     @Category(name = "Catalog Structure and Products", description = "A set of calls for the Catalog Structure and Products resources.")
     public void upsertCategory(CategoryDTO category) throws IOException
     {
-        this.client.upsertCategory(category);
+        connection.getClient().upsertCategory(category);
     }
 
     /**
@@ -317,7 +254,7 @@ public class HybrisConnector
     public void deleteCategory(String catalogId, String version, String categoryCode)
             throws IOException
     {
-        this.client.deleteCategory(catalogId, version, categoryCode);
+        connection.getClient().deleteCategory(catalogId, version, categoryCode);
     }
 
     /**
@@ -341,7 +278,7 @@ public class HybrisConnector
     public ProductDTO getProduct(String catalogId, String version, String productCode)
             throws IOException
     {
-        return this.client.getProduct(catalogId, version, productCode);
+        return connection.getClient().getProduct(catalogId, version, productCode);
     }
 
     /**
@@ -359,7 +296,7 @@ public class HybrisConnector
     @Category(name = "Catalog Structure and Products", description = "A set of calls for the Catalog Structure and Products resources.")
     public void upsertProduct(ProductDTO product) throws IOException
     {
-        this.client.upsertProduct(product);
+        connection.getClient().upsertProduct(product);
     }
 
     /**
@@ -382,7 +319,7 @@ public class HybrisConnector
     public void deleteProduct(String catalogId, String version, String productCode)
             throws IOException
     {
-        this.client.deleteProduct(catalogId, version, productCode);
+        connection.getClient().deleteProduct(catalogId, version, productCode);
     }
 
     /**
@@ -400,14 +337,16 @@ public class HybrisConnector
     @Processor
     @Category(name = "Catalog Structure and Products", description = "A set of calls for the Catalog Structure and Products resources.")
     @Paged
-    public PagingDelegate<UnitDTO> getUnits(final PagingConfiguration pagingConfiguration)
-            throws IOException
+    public ProviderAwarePagingDelegate<UnitDTO, HybrisConnector> getUnits(
+            final PagingConfiguration pagingConfiguration) throws IOException
     {
         return new HybrisPagingDelegate<UnitDTO>() {
             @Override
-            public List<UnitDTO> doGetPage() throws IOException
+            public List<UnitDTO> doGetPage(HybrisConnector connector) throws IOException
             {
-                UnitsDTO unitsDTO = client.getUnits(pagingConfiguration.getFetchSize(), this.start);
+
+                UnitsDTO unitsDTO = connection.getClient().getUnits(
+                        pagingConfiguration.getFetchSize(), this.start);
                 return unitsDTO.getUnit();
             }
         };
@@ -429,7 +368,7 @@ public class HybrisConnector
     @Category(name = "Catalog Structure and Products", description = "A set of calls for the Catalog Structure and Products resources.")
     public UnitDTO getUnit(String unitCode) throws IOException
     {
-        return this.client.getUnit(unitCode);
+        return connection.getClient().getUnit(unitCode);
     }
 
     /**
@@ -447,7 +386,7 @@ public class HybrisConnector
     @Category(name = "Catalog Structure and Products", description = "A set of calls for the Catalog Structure and Products resources.")
     public void upsertUnit(UnitDTO unit) throws IOException
     {
-        this.client.upsertUnit(unit);
+        connection.getClient().upsertUnit(unit);
     }
 
     /**
@@ -465,7 +404,7 @@ public class HybrisConnector
     @Category(name = "Catalog Structure and Products", description = "A set of calls for the Catalog Structure and Products resources.")
     public void deleteUnit(String unitCode) throws IOException
     {
-        this.client.deleteUnit(unitCode);
+        connection.getClient().deleteUnit(unitCode);
     }
 
     /**
@@ -483,14 +422,14 @@ public class HybrisConnector
     @Processor
     @Category(name = "Ordering Process", description = "A set of calls for the Ordering Process resources.")
     @Paged
-    public PagingDelegate<CurrencyDTO> getCurrencies(final PagingConfiguration pagingConfiguration)
-            throws IOException
+    public ProviderAwarePagingDelegate<CurrencyDTO, HybrisConnector> getCurrencies(
+            final PagingConfiguration pagingConfiguration) throws IOException
     {
         return new HybrisPagingDelegate<CurrencyDTO>() {
             @Override
-            public List<CurrencyDTO> doGetPage() throws IOException
+            public List<CurrencyDTO> doGetPage(HybrisConnector connector) throws IOException
             {
-                CurrenciesDTO currenciesDto = client.getCurrencies(
+                CurrenciesDTO currenciesDto = connection.getClient().getCurrencies(
                         pagingConfiguration.getFetchSize(), start);
                 return currenciesDto.getCurrency();
             }
@@ -513,7 +452,7 @@ public class HybrisConnector
     @Category(name = "Ordering Process", description = "A set of calls for the Ordering Process resources.")
     public CurrencyDTO getCurrency(String isocode) throws IOException
     {
-        return this.client.getCurrency(isocode);
+        return connection.getClient().getCurrency(isocode);
     }
 
     /**
@@ -533,7 +472,7 @@ public class HybrisConnector
     @Category(name = "Ordering Process", description = "A set of calls for the Ordering Process resources.")
     public void upsertCurrency(CurrencyDTO currency) throws IOException
     {
-        this.client.upsertCurrency(currency);
+        connection.getClient().upsertCurrency(currency);
     }
 
     /**
@@ -551,7 +490,7 @@ public class HybrisConnector
     @Category(name = "Ordering Process", description = "A set of calls for the Ordering Process resources.")
     public void deleteCurrency(String isocode) throws IOException
     {
-        this.client.deleteCurrency(isocode);
+        connection.getClient().deleteCurrency(isocode);
     }
 
     /**
@@ -569,15 +508,15 @@ public class HybrisConnector
     @Processor
     @Category(name = "Ordering Process", description = "A set of calls for the Ordering Process resources.")
     @Paged
-    public PagingDelegate<DiscountDTO> getDiscounts(final PagingConfiguration pagingConfiguration)
-            throws IOException
+    public ProviderAwarePagingDelegate<DiscountDTO, HybrisConnector> getDiscounts(
+            final PagingConfiguration pagingConfiguration) throws IOException
     {
         return new HybrisPagingDelegate<DiscountDTO>() {
             @Override
-            public List<DiscountDTO> doGetPage() throws IOException
+            public List<DiscountDTO> doGetPage(HybrisConnector connector) throws IOException
             {
-                DiscountsDTO discountsDto = client.getDiscounts(pagingConfiguration.getFetchSize(),
-                        this.start);
+                DiscountsDTO discountsDto = connection.getClient().getDiscounts(
+                        pagingConfiguration.getFetchSize(), this.start);
                 return discountsDto.getDiscount();
             }
         };
@@ -599,7 +538,7 @@ public class HybrisConnector
     @Category(name = "Ordering Process", description = "A set of calls for the Ordering Process resources.")
     public DiscountDTO getDiscount(String code) throws IOException
     {
-        return this.client.getDiscount(code);
+        return connection.getClient().getDiscount(code);
     }
 
     /**
@@ -619,7 +558,7 @@ public class HybrisConnector
     @Category(name = "Ordering Process", description = "A set of calls for the Ordering Process resources.")
     public void upsertDiscount(DiscountDTO discount) throws IOException
     {
-        this.client.upsertDiscount(discount);
+        connection.getClient().upsertDiscount(discount);
     }
 
     /**
@@ -637,7 +576,7 @@ public class HybrisConnector
     @Category(name = "Ordering Process", description = "A set of calls for the Ordering Process resources.")
     public void deleteDiscount(String code) throws IOException
     {
-        this.client.deleteDiscount(code);
+        connection.getClient().deleteDiscount(code);
     }
 
     /**
@@ -655,14 +594,15 @@ public class HybrisConnector
     @Processor
     @Category(name = "Ordering Process", description = "A set of calls for the Ordering Process resources.")
     @Paged
-    public PagingDelegate<CartDTO> getCarts(final PagingConfiguration pagingConfiguration)
-            throws IOException
+    public ProviderAwarePagingDelegate<CartDTO, HybrisConnector> getCarts(
+            final PagingConfiguration pagingConfiguration) throws IOException
     {
         return new HybrisPagingDelegate<CartDTO>() {
             @Override
-            public List<CartDTO> doGetPage() throws IOException
+            public List<CartDTO> doGetPage(HybrisConnector connector) throws IOException
             {
-                CartsDTO cartsDto = client.getCarts(pagingConfiguration.getFetchSize(), this.start);
+                CartsDTO cartsDto = connection.getClient().getCarts(
+                        pagingConfiguration.getFetchSize(), this.start);
                 return cartsDto.getCart();
             }
         };
@@ -684,7 +624,7 @@ public class HybrisConnector
     @Category(name = "Ordering Process", description = "A set of calls for the Ordering Process resources.")
     public CartDTO getCart(String code) throws IOException
     {
-        return this.client.getCart(code);
+        return connection.getClient().getCart(code);
     }
 
     /**
@@ -704,7 +644,7 @@ public class HybrisConnector
     @Category(name = "Ordering Process", description = "A set of calls for the Ordering Process resources.")
     public void upsertCart(CartDTO cart) throws IOException
     {
-        this.client.upsertCart(cart);
+        connection.getClient().upsertCart(cart);
     }
 
     /**
@@ -722,7 +662,7 @@ public class HybrisConnector
     @Category(name = "Ordering Process", description = "A set of calls for the Ordering Process resources.")
     public void deleteCart(String code) throws IOException
     {
-        this.client.deleteCart(code);
+        connection.getClient().deleteCart(code);
     }
 
     /**
@@ -740,14 +680,14 @@ public class HybrisConnector
     @Processor
     @Category(name = "Ordering Process", description = "A set of calls for the Ordering Process resources.")
     @Paged
-    public PagingDelegate<CartEntryDTO> getCartEntries(final PagingConfiguration pagingConfiguration)
-            throws IOException
+    public ProviderAwarePagingDelegate<CartEntryDTO, HybrisConnector> getCartEntries(
+            final PagingConfiguration pagingConfiguration) throws IOException
     {
         return new HybrisPagingDelegate<CartEntryDTO>() {
             @Override
-            public List<CartEntryDTO> doGetPage() throws IOException
+            public List<CartEntryDTO> doGetPage(HybrisConnector connector) throws IOException
             {
-                CartEntriesDTO cartEntriesDto = client.getCartEntries(
+                CartEntriesDTO cartEntriesDto = connection.getClient().getCartEntries(
                         pagingConfiguration.getFetchSize(), this.start);
                 return cartEntriesDto.getCartentry();
             }
@@ -770,7 +710,7 @@ public class HybrisConnector
     @Category(name = "Ordering Process", description = "A set of calls for the Ordering Process resources.")
     public CartEntryDTO getCartEntry(Long pk) throws IOException
     {
-        return this.client.getCartEntry(pk);
+        return connection.getClient().getCartEntry(pk);
     }
 
     /**
@@ -790,7 +730,7 @@ public class HybrisConnector
     @Category(name = "Ordering Process", description = "A set of calls for the Ordering Process resources.")
     public void upsertCartEntry(CartEntryDTO cartEntry) throws IOException
     {
-        this.client.upsertCartEntry(cartEntry);
+        connection.getClient().upsertCartEntry(cartEntry);
     }
 
     /**
@@ -808,7 +748,7 @@ public class HybrisConnector
     @Category(name = "Ordering Process", description = "A set of calls for the Ordering Process resources.")
     public void deleteCartEntry(Long pk) throws IOException
     {
-        this.client.deleteCartEntry(pk);
+        connection.getClient().deleteCartEntry(pk);
     }
 
     /**
@@ -826,15 +766,15 @@ public class HybrisConnector
     @Processor
     @Category(name = "Country, Region and Locale", description = "A set of calls for the Country, Region and Locale resources.")
     @Paged
-    public PagingDelegate<CountryDTO> getCountries(final PagingConfiguration pagingConfiguration)
-            throws IOException
+    public ProviderAwarePagingDelegate<CountryDTO, HybrisConnector> getCountries(
+            final PagingConfiguration pagingConfiguration) throws IOException
     {
         return new HybrisPagingDelegate<CountryDTO>() {
             @Override
-            public List<CountryDTO> doGetPage() throws IOException
+            public List<CountryDTO> doGetPage(HybrisConnector connector) throws IOException
             {
-                CountriesDTO countriesDto = client.getCountries(pagingConfiguration.getFetchSize(),
-                        this.start);
+                CountriesDTO countriesDto = connection.getClient().getCountries(
+                        pagingConfiguration.getFetchSize(), this.start);
                 return countriesDto.getCountry();
             }
         };
@@ -855,14 +795,14 @@ public class HybrisConnector
     @Processor
     @Category(name = "Ordering Process", description = "A set of calls for the Ordering Process resources.")
     @Paged
-    public PagingDelegate<PaymentModeDTO> getPaymentModes(
+    public ProviderAwarePagingDelegate<PaymentModeDTO, HybrisConnector> getPaymentModes(
             final PagingConfiguration pagingConfiguration) throws IOException
     {
         return new HybrisPagingDelegate<PaymentModeDTO>() {
             @Override
-            public List<PaymentModeDTO> doGetPage() throws IOException
+            public List<PaymentModeDTO> doGetPage(HybrisConnector connector) throws IOException
             {
-                PaymentModesDTO paymentModesDto = client.getPaymentModes(
+                PaymentModesDTO paymentModesDto = connection.getClient().getPaymentModes(
                         pagingConfiguration.getFetchSize(), this.start);
                 return paymentModesDto.getPaymentmode();
             }
@@ -885,7 +825,7 @@ public class HybrisConnector
     @Category(name = "Ordering Process", description = "A set of calls for the Ordering Process resources.")
     public PaymentModeDTO getPaymentMode(String code) throws IOException
     {
-        return this.client.getPaymentMode(code);
+        return connection.getClient().getPaymentMode(code);
     }
 
     /**
@@ -905,7 +845,7 @@ public class HybrisConnector
     @Category(name = "Ordering Process", description = "A set of calls for the Ordering Process resources.")
     public void upsertPaymentMode(PaymentModeDTO paymentMode) throws IOException
     {
-        this.client.upsertPaymentMode(paymentMode);
+        connection.getClient().upsertPaymentMode(paymentMode);
     }
 
     /**
@@ -923,7 +863,7 @@ public class HybrisConnector
     @Category(name = "Ordering Process", description = "A set of calls for the Ordering Process resources.")
     public void deletePaymentMode(String code) throws IOException
     {
-        this.client.deletePaymentMode(code);
+        connection.getClient().deletePaymentMode(code);
     }
 
     /**
@@ -942,7 +882,7 @@ public class HybrisConnector
     @Category(name = "Country, Region and Locale", description = "A set of calls for the Country, Region and Locale resources.")
     public CountryDTO getCountry(String isocode) throws IOException
     {
-        return this.client.getCountry(isocode);
+        return connection.getClient().getCountry(isocode);
     }
 
     /**
@@ -962,7 +902,7 @@ public class HybrisConnector
     @Category(name = "Country, Region and Locale", description = "A set of calls for the Country, Region and Locale resources.")
     public void upsertCountry(CountryDTO country) throws IOException
     {
-        this.client.upsertCountry(country);
+        connection.getClient().upsertCountry(country);
     }
 
     /**
@@ -980,7 +920,7 @@ public class HybrisConnector
     @Category(name = "Country, Region and Locale", description = "A set of calls for the Country, Region and Locale resources.")
     public void deleteCountry(String isocode) throws IOException
     {
-        this.client.deleteCountry(isocode);
+        connection.getClient().deleteCountry(isocode);
     }
 
     /**
@@ -998,15 +938,15 @@ public class HybrisConnector
     @Processor
     @Category(name = "Country, Region and Locale", description = "A set of calls for the Country, Region and Locale resources.")
     @Paged
-    public PagingDelegate<RegionDTO> getRegions(final PagingConfiguration pagingConfiguration)
-            throws IOException
+    public ProviderAwarePagingDelegate<RegionDTO, HybrisConnector> getRegions(
+            final PagingConfiguration pagingConfiguration) throws IOException
     {
         return new HybrisPagingDelegate<RegionDTO>() {
             @Override
-            public List<RegionDTO> doGetPage() throws IOException
+            public List<RegionDTO> doGetPage(HybrisConnector connector) throws IOException
             {
-                RegionsDTO regionsDto = client.getRegions(pagingConfiguration.getFetchSize(),
-                        this.start);
+                RegionsDTO regionsDto = connection.getClient().getRegions(
+                        pagingConfiguration.getFetchSize(), this.start);
                 return regionsDto.getRegion();
             }
         };
@@ -1028,7 +968,7 @@ public class HybrisConnector
     @Category(name = "Country, Region and Locale", description = "A set of calls for the Country, Region and Locale resources.")
     public RegionDTO getRegion(String isocode) throws IOException
     {
-        return this.client.getRegion(isocode);
+        return connection.getClient().getRegion(isocode);
     }
 
     /**
@@ -1048,7 +988,7 @@ public class HybrisConnector
     @Category(name = "Country, Region and Locale", description = "A set of calls for the Country, Region and Locale resources.")
     public void upsertRegion(RegionDTO region) throws IOException
     {
-        this.client.upsertRegion(region);
+        connection.getClient().upsertRegion(region);
     }
 
     /**
@@ -1066,7 +1006,7 @@ public class HybrisConnector
     @Category(name = "Country, Region and Locale", description = "A set of calls for the Country, Region and Locale resources.")
     public void deleteRegion(String isocode) throws IOException
     {
-        this.client.deleteRegion(isocode);
+        connection.getClient().deleteRegion(isocode);
     }
 
     /**
@@ -1084,15 +1024,15 @@ public class HybrisConnector
     @Processor
     @Category(name = "Country, Region and Locale", description = "A set of calls for the Country, Region and Locale resources.")
     @Paged
-    public PagingDelegate<LanguageDTO> getLanguages(final PagingConfiguration pagingConfiguration)
-            throws IOException
+    public ProviderAwarePagingDelegate<LanguageDTO, HybrisConnector> getLanguages(
+            final PagingConfiguration pagingConfiguration) throws IOException
     {
         return new HybrisPagingDelegate<LanguageDTO>() {
             @Override
-            public List<LanguageDTO> doGetPage() throws IOException
+            public List<LanguageDTO> doGetPage(HybrisConnector connector) throws IOException
             {
-                LanguagesDTO languagesDto = client.getLanguages(pagingConfiguration.getFetchSize(),
-                        this.start);
+                LanguagesDTO languagesDto = connection.getClient().getLanguages(
+                        pagingConfiguration.getFetchSize(), this.start);
                 return languagesDto.getLanguage();
             }
         };
@@ -1114,7 +1054,7 @@ public class HybrisConnector
     @Category(name = "Country, Region and Locale", description = "A set of calls for the Country, Region and Locale resources.")
     public LanguageDTO getLanguage(String isocode) throws IOException
     {
-        return this.client.getLanguage(isocode);
+        return connection.getClient().getLanguage(isocode);
     }
 
     /**
@@ -1134,7 +1074,7 @@ public class HybrisConnector
     @Category(name = "Country, Region and Locale", description = "A set of calls for the Country, Region and Locale resources.")
     public void upsertLanguage(LanguageDTO language) throws IOException
     {
-        this.client.upsertLanguage(language);
+        connection.getClient().upsertLanguage(language);
     }
 
     /**
@@ -1152,16 +1092,16 @@ public class HybrisConnector
     @Category(name = "Country, Region and Locale", description = "A set of calls for the Country, Region and Locale resources.")
     public void deleteLanguage(String isocode) throws IOException
     {
-        this.client.deleteLanguage(isocode);
+        connection.getClient().deleteLanguage(isocode);
     }
 
-    public String getEndpointUrl()
+    public HybrisBasicConnectionStrategy getConnection()
     {
-        return endpointUrl;
+        return connection;
     }
 
-    public void setEndpointUrl(String endpointUrl)
+    public void setConnection(HybrisBasicConnectionStrategy connection)
     {
-        this.endpointUrl = endpointUrl;
+        this.connection = connection;
     }
 }

@@ -1,12 +1,17 @@
 package org.mule.modules.hybris.client.impl;
 
-import static org.mule.modules.hybris.client.ClientUtil.execute;
 import static org.mule.modules.hybris.client.ClientUtil.validateAndParseResponse;
 
-import javax.ws.rs.HttpMethod;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.NewCookie;
+import javax.ws.rs.core.Response;
 
+import org.glassfish.jersey.client.ClientConfig;
+import org.glassfish.jersey.client.authentication.HttpAuthenticationFeature;
 import org.mule.api.ConnectionException;
 import org.mule.api.ConnectionExceptionCode;
 import org.mule.modules.hybris.client.HybrisAPIException;
@@ -36,12 +41,6 @@ import org.mule.modules.hybris.model.RegionsDTO;
 import org.mule.modules.hybris.model.UnitDTO;
 import org.mule.modules.hybris.model.UnitsDTO;
 
-import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.WebResource;
-import com.sun.jersey.api.client.config.DefaultClientConfig;
-import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
-
 public class HybrisRestClient implements HybrisClient
 {
     private static final String LOGIN_PATH = "login";
@@ -62,24 +61,29 @@ public class HybrisRestClient implements HybrisClient
     private NewCookie sessionId;
 
     protected Client client;
-    protected WebResource webResource;
+    protected WebTarget webResource;
 
     private String endpointUrl;
 
     public HybrisRestClient(String endpointUrl)
     {
         this.endpointUrl = endpointUrl;
-        this.client = Client.create(new DefaultClientConfig());
     }
 
     @Override
     public void login(String username, String password) throws ConnectionException
     {
-        client.addFilter(new HTTPBasicAuthFilter(username, password));
+        HttpAuthenticationFeature feature = HttpAuthenticationFeature.basic(username, password);
 
-        this.webResource = client.resource(endpointUrl);
+        ClientConfig clientConfig = new ClientConfig();
+        clientConfig.register(feature);
 
-        ClientResponse response = webResource.path(LOGIN_PATH).get(ClientResponse.class);
+        this.client = ClientBuilder.newClient(clientConfig);
+
+        this.webResource = client.target(endpointUrl);
+        this.webResource.register(feature);
+
+        Response response = webResource.path(LOGIN_PATH).request().get(Response.class);
 
         int status = response.getStatus();
         if (status == 200)
@@ -90,7 +94,7 @@ public class HybrisRestClient implements HybrisClient
             } else
             {
                 throw new ConnectionException(ConnectionExceptionCode.UNKNOWN,
-                        response.getEntity(String.class), "Hybris Rejected Login");
+                        response.readEntity(String.class), "Hybris Rejected Login");
             }
         } else if (status == 403)
         {
@@ -102,7 +106,7 @@ public class HybrisRestClient implements HybrisClient
     }
 
     @Override
-    public void logout() throws ConnectionException
+    public void logout()
     {
         this.client = null;
         this.sessionId = null;
@@ -123,456 +127,487 @@ public class HybrisRestClient implements HybrisClient
     @Override
     public CatalogsDTO getCatalogs(int size, int page)
     {
-        WebResource.Builder resource = webResource.path(CATALOGS_PATH)
+        Response response = webResource.path(CATALOGS_PATH)
                 .queryParam("catalogs_size", Integer.toString(size))
-                .queryParam("catalogs_page", Integer.toString(page)).cookie(sessionId);
-        return validateAndParseResponse(execute(HttpMethod.GET, resource), CatalogsDTO.class, 200);
+                .queryParam("catalogs_page", Integer.toString(page)).request().cookie(sessionId)
+                .get();
+
+        return validateAndParseResponse(response, CatalogsDTO.class, 200);
     }
 
     @Override
     public CatalogDTO getCatalog(String catalogId) throws HybrisAPIException, HybrisClientException
     {
-        WebResource.Builder resource = webResource.path(CATALOGS_PATH).path(catalogId)
-                .cookie(sessionId);
+        Response response = webResource.path(CATALOGS_PATH).path(catalogId).request()
+                .cookie(sessionId).get();
 
-        return validateAndParseResponse(execute(HttpMethod.GET, resource), CatalogDTO.class, 200);
+        return validateAndParseResponse(response, CatalogDTO.class, 200);
     }
 
     @Override
     public void upsertCatalog(CatalogDTO catalog) throws HybrisAPIException, HybrisClientException
     {
-        WebResource.Builder resource = webResource.path(CATALOGS_PATH).path(catalog.getId())
-                .cookie(sessionId).type(MediaType.APPLICATION_XML).entity(catalog);
+        Response response = webResource.path(CATALOGS_PATH).path(catalog.getId()).request()
+                .cookie(sessionId).put(Entity.entity(catalog, MediaType.APPLICATION_XML));
 
-        validateAndParseResponse(execute(HttpMethod.PUT, resource), String.class, 200, 201);
+        validateAndParseResponse(response, String.class, 200, 201);
     }
 
     @Override
     public void deleteCatalog(String catalogId) throws HybrisAPIException, HybrisClientException
     {
-        WebResource.Builder resource = webResource.path(CATALOGS_PATH).path(catalogId)
-                .cookie(sessionId);
+        Response response = webResource.path(CATALOGS_PATH).path(catalogId).request()
+                .cookie(sessionId).delete();
 
-        validateAndParseResponse(execute(HttpMethod.DELETE, resource), String.class, 200);
+        validateAndParseResponse(response, String.class, 200);
     }
 
     @Override
-    public CatalogVersionDTO getCatalogVersion(String catalogId, String version) throws HybrisAPIException, HybrisClientException
+    public CatalogVersionDTO getCatalogVersion(String catalogId, String version)
+            throws HybrisAPIException, HybrisClientException
     {
-        WebResource.Builder resource = webResource.path(CATALOGS_PATH).path(catalogId)
-                .path(CATALOG_VERSIONS_PATH).path(version).cookie(sessionId);
+        Response response = webResource.path(CATALOGS_PATH).path(catalogId)
+                .path(CATALOG_VERSIONS_PATH).path(version).request().cookie(sessionId).get();
 
-        return validateAndParseResponse(execute(HttpMethod.GET, resource), CatalogVersionDTO.class,
-                200);
+        return validateAndParseResponse(response, CatalogVersionDTO.class, 200);
     }
 
     @Override
-    public void upsertCatalogVersion(CatalogVersionDTO catalogVersion) throws HybrisAPIException, HybrisClientException
+    public void upsertCatalogVersion(CatalogVersionDTO catalogVersion) throws HybrisAPIException,
+            HybrisClientException
     {
-        WebResource.Builder resource = webResource.path(CATALOGS_PATH)
+        Response response = webResource.path(CATALOGS_PATH)
                 .path(catalogVersion.getCatalog().getId()).path(CATALOG_VERSIONS_PATH)
-                .path(catalogVersion.getVersion()).cookie(sessionId)
-                .type(MediaType.APPLICATION_XML).entity(catalogVersion);
+                .path(catalogVersion.getVersion()).request().cookie(sessionId)
+                .put(Entity.entity(catalogVersion, MediaType.APPLICATION_XML_TYPE));
 
-        validateAndParseResponse(execute(HttpMethod.PUT, resource), String.class, 200, 201);
+        validateAndParseResponse(response, String.class, 200, 201);
     }
 
     @Override
-    public void deleteCatalogVersion(String catalogId, String version) throws HybrisAPIException, HybrisClientException
+    public void deleteCatalogVersion(String catalogId, String version) throws HybrisAPIException,
+            HybrisClientException
     {
-        WebResource.Builder resource = webResource.path(CATALOGS_PATH).path(catalogId)
-                .path(CATALOG_VERSIONS_PATH).path(version).cookie(sessionId);
+        Response response = webResource.path(CATALOGS_PATH).path(catalogId)
+                .path(CATALOG_VERSIONS_PATH).path(version).request().cookie(sessionId).delete();
 
-        validateAndParseResponse(execute(HttpMethod.DELETE, resource), String.class, 200);
+        validateAndParseResponse(response, String.class, 200);
     }
 
     @Override
     public CategoryDTO getCategory(String catalogId, String version, String categoryCode)
             throws HybrisAPIException, HybrisClientException
     {
-        WebResource.Builder resource = webResource.path(CATALOGS_PATH).path(catalogId)
+        Response response = webResource.path(CATALOGS_PATH).path(catalogId)
                 .path(CATALOG_VERSIONS_PATH).path(version).path(CATEGORIES_PATH).path(categoryCode)
-                .cookie(sessionId);
+                .request().cookie(sessionId).get();
 
-        return validateAndParseResponse(execute(HttpMethod.GET, resource), CategoryDTO.class, 200);
+        return validateAndParseResponse(response, CategoryDTO.class, 200);
     }
 
     @Override
-    public void upsertCategory(CategoryDTO category) throws HybrisAPIException, HybrisClientException
+    public void upsertCategory(CategoryDTO category) throws HybrisAPIException,
+            HybrisClientException
     {
-        WebResource.Builder resource = webResource.path(CATALOGS_PATH)
+        Response response = webResource.path(CATALOGS_PATH)
                 .path(category.getCatalogVersion().getCatalog().getId())
                 .path(CATALOG_VERSIONS_PATH).path(category.getCatalogVersion().getVersion())
-                .path(CATEGORIES_PATH).path(category.getCode()).cookie(sessionId)
-                .type(MediaType.APPLICATION_XML).entity(category);
+                .path(CATEGORIES_PATH).path(category.getCode()).request().cookie(sessionId)
+                .put(Entity.entity(category, MediaType.APPLICATION_XML));
 
-        validateAndParseResponse(execute(HttpMethod.PUT, resource), String.class, 200, 201);
+        validateAndParseResponse(response, String.class, 200, 201);
     }
 
     @Override
     public void deleteCategory(String catalogId, String version, String categoryCode)
             throws HybrisAPIException, HybrisClientException
     {
-        WebResource.Builder resource = webResource.path(CATALOGS_PATH).path(catalogId)
+        Response response = webResource.path(CATALOGS_PATH).path(catalogId)
                 .path(CATALOG_VERSIONS_PATH).path(version).path(CATEGORIES_PATH).path(categoryCode)
-                .cookie(sessionId);
+                .request().cookie(sessionId).delete();
 
-        validateAndParseResponse(execute(HttpMethod.DELETE, resource), String.class, 200);
+        validateAndParseResponse(response, String.class, 200);
     }
 
     @Override
     public ProductDTO getProduct(String catalogId, String version, String productCode)
             throws HybrisAPIException, HybrisClientException
     {
-        WebResource.Builder resource = webResource.path(CATALOGS_PATH).path(catalogId)
+        Response response = webResource.path(CATALOGS_PATH).path(catalogId)
                 .path(CATALOG_VERSIONS_PATH).path(version).path(PRODUCTS_PATH).path(productCode)
-                .cookie(sessionId);
+                .request().cookie(sessionId).get();
 
-        return validateAndParseResponse(execute(HttpMethod.GET, resource), ProductDTO.class, 200);
+        return validateAndParseResponse(response, ProductDTO.class, 200);
     }
 
     @Override
     public void upsertProduct(ProductDTO product) throws HybrisAPIException, HybrisClientException
     {
-        WebResource.Builder resource = webResource.path(CATALOGS_PATH)
+        Response response = webResource.path(CATALOGS_PATH)
                 .path(product.getCatalogVersion().getCatalog().getId()).path(CATALOG_VERSIONS_PATH)
                 .path(product.getCatalogVersion().getVersion()).path(PRODUCTS_PATH)
-                .path(product.getCode()).cookie(sessionId).type(MediaType.APPLICATION_XML)
-                .entity(product);
+                .path(product.getCode()).request().cookie(sessionId)
+                .put(Entity.entity(product, MediaType.APPLICATION_XML_TYPE));
 
-        validateAndParseResponse(execute(HttpMethod.PUT, resource), String.class, 200, 201);
+        validateAndParseResponse(response, String.class, 200, 201);
     }
 
     @Override
     public void deleteProduct(String catalogId, String version, String productCode)
             throws HybrisAPIException, HybrisClientException
     {
-        WebResource.Builder resource = webResource.path(CATALOGS_PATH).path(catalogId)
+        Response response = webResource.path(CATALOGS_PATH).path(catalogId)
                 .path(CATALOG_VERSIONS_PATH).path(version).path(PRODUCTS_PATH).path(productCode)
-                .cookie(sessionId);
+                .request().cookie(sessionId).delete();
 
-        validateAndParseResponse(execute(HttpMethod.DELETE, resource), String.class, 200);
+        validateAndParseResponse(response, String.class, 200);
     }
 
     @Override
     public UnitsDTO getUnits(int size, int page)
     {
-        WebResource.Builder resource = webResource.path(UNITS_PATH)
+        Response response = webResource.path(UNITS_PATH)
                 .queryParam("units_size", Integer.toString(size))
-                .queryParam("units_page", Integer.toString(page)).cookie(sessionId);
+                .queryParam("units_page", Integer.toString(page)).request().cookie(sessionId).get();
 
-        return validateAndParseResponse(execute(HttpMethod.GET, resource), UnitsDTO.class, 200);
+        return validateAndParseResponse(response, UnitsDTO.class, 200);
     }
 
     @Override
     public UnitDTO getUnit(String unitCode) throws HybrisAPIException, HybrisClientException
     {
-        WebResource.Builder resource = webResource.path(UNITS_PATH).path(unitCode)
-                .cookie(sessionId);
+        Response response = webResource.path(UNITS_PATH).path(unitCode).request().cookie(sessionId)
+                .get();
 
-        return validateAndParseResponse(execute(HttpMethod.GET, resource), UnitDTO.class, 200);
+        return validateAndParseResponse(response, UnitDTO.class, 200);
     }
 
     @Override
     public void upsertUnit(UnitDTO unit) throws HybrisAPIException, HybrisClientException
     {
-        WebResource.Builder resource = webResource.path(UNITS_PATH).path(unit.getCode())
-                .cookie(sessionId).type(MediaType.APPLICATION_XML).entity(unit);
+        Response response = webResource.path(UNITS_PATH).path(unit.getCode()).request()
+                .cookie(sessionId).put(Entity.entity(unit, MediaType.APPLICATION_XML_TYPE));
 
-        validateAndParseResponse(execute(HttpMethod.PUT, resource), String.class, 200, 201);
+        validateAndParseResponse(response, String.class, 200, 201);
     }
 
     @Override
     public void deleteUnit(String unitCode) throws HybrisAPIException, HybrisClientException
     {
-        WebResource.Builder resource = webResource.path(UNITS_PATH).path(unitCode)
-                .cookie(sessionId);
+        Response response = webResource.path(UNITS_PATH).path(unitCode).request().cookie(sessionId)
+                .delete();
 
-        validateAndParseResponse(execute(HttpMethod.DELETE, resource), String.class, 200);
+        validateAndParseResponse(response, String.class, 200);
     }
 
     @Override
     public CurrenciesDTO getCurrencies(int size, int page)
     {
-        WebResource.Builder resource = webResource.path(CURRENCIES_PATH)
+        Response response = webResource.path(CURRENCIES_PATH)
                 .queryParam("currencies_size", Integer.toString(size))
-                .queryParam("currencies_page", Integer.toString(page)).cookie(sessionId);
+                .queryParam("currencies_page", Integer.toString(page)).request().cookie(sessionId)
+                .get();
 
-        return validateAndParseResponse(execute(HttpMethod.GET, resource), CurrenciesDTO.class, 200);
+        return validateAndParseResponse(response, CurrenciesDTO.class, 200);
     }
 
     @Override
     public CurrencyDTO getCurrency(String isocode) throws HybrisAPIException, HybrisClientException
     {
-        WebResource.Builder resource = webResource.path(CURRENCIES_PATH).path(isocode)
-                .cookie(sessionId);
+        Response response = webResource.path(CURRENCIES_PATH).path(isocode).request()
+                .cookie(sessionId).get();
 
-        return validateAndParseResponse(execute(HttpMethod.GET, resource), CurrencyDTO.class, 200);
+        return validateAndParseResponse(response, CurrencyDTO.class, 200);
     }
 
     @Override
-    public void upsertCurrency(CurrencyDTO currency) throws HybrisAPIException, HybrisClientException
+    public void upsertCurrency(CurrencyDTO currency) throws HybrisAPIException,
+            HybrisClientException
     {
-        WebResource.Builder resource = webResource.path(CURRENCIES_PATH)
-                .path(currency.getIsocode()).cookie(sessionId).type(MediaType.APPLICATION_XML)
-                .entity(currency);
+        Response response = webResource.path(CURRENCIES_PATH).path(currency.getIsocode()).request()
+                .cookie(sessionId).put(Entity.entity(currency, MediaType.APPLICATION_XML_TYPE));
 
-        validateAndParseResponse(execute(HttpMethod.PUT, resource), String.class, 200, 201);
+        validateAndParseResponse(response, String.class, 200, 201);
     }
 
     @Override
     public void deleteCurrency(String isocode) throws HybrisAPIException, HybrisClientException
     {
-        WebResource.Builder resource = webResource.path(CURRENCIES_PATH).path(isocode)
-                .cookie(sessionId);
+        Response response = webResource.path(CURRENCIES_PATH).path(isocode).request()
+                .cookie(sessionId).delete();
 
-        validateAndParseResponse(execute(HttpMethod.DELETE, resource), String.class, 200);
+        validateAndParseResponse(response, String.class, 200);
     }
 
     @Override
     public DiscountsDTO getDiscounts(int size, int page)
     {
-        WebResource.Builder resource = webResource.path(DISCOUNTS_PATH)
+        Response response = webResource.path(DISCOUNTS_PATH)
                 .queryParam("discounts_size", Integer.toString(size))
-                .queryParam("discounts_page", Integer.toString(page)).cookie(sessionId);
+                .queryParam("discounts_page", Integer.toString(page)).request().cookie(sessionId)
+                .get();
 
-        return validateAndParseResponse(execute(HttpMethod.GET, resource), DiscountsDTO.class, 200);
+        return validateAndParseResponse(response, DiscountsDTO.class, 200);
     }
 
     @Override
     public DiscountDTO getDiscount(String code) throws HybrisAPIException, HybrisClientException
     {
-        WebResource.Builder resource = webResource.path(DISCOUNTS_PATH).path(code).cookie(sessionId);
+        Response response = webResource.path(DISCOUNTS_PATH).path(code).request().cookie(sessionId)
+                .get();
 
-        return validateAndParseResponse(execute(HttpMethod.GET, resource), DiscountDTO.class, 200);
+        return validateAndParseResponse(response, DiscountDTO.class, 200);
     }
 
     @Override
-    public void upsertDiscount(DiscountDTO discount) throws HybrisAPIException, HybrisClientException
+    public void upsertDiscount(DiscountDTO discount) throws HybrisAPIException,
+            HybrisClientException
     {
-        WebResource.Builder resource = webResource.path(DISCOUNTS_PATH).path(discount.getCode()).cookie(sessionId)
-                .type(MediaType.APPLICATION_XML).entity(discount);
-        
-        validateAndParseResponse(execute(HttpMethod.PUT, resource), String.class, 200, 201);
+        Response response = webResource.path(DISCOUNTS_PATH).path(discount.getCode()).request()
+                .cookie(sessionId).put(Entity.entity(discount, MediaType.APPLICATION_XML_TYPE));
+
+        validateAndParseResponse(response, String.class, 200, 201);
     }
 
     @Override
     public void deleteDiscount(String code) throws HybrisAPIException, HybrisClientException
     {
-        WebResource.Builder resource =  webResource.path(DISCOUNTS_PATH).path(code).cookie(sessionId);
-        
-        validateAndParseResponse(execute(HttpMethod.DELETE, resource), String.class, 200);
+        Response response = webResource.path(DISCOUNTS_PATH).path(code).request().cookie(sessionId)
+                .delete();
+
+        validateAndParseResponse(response, String.class, 200);
     }
 
     @Override
     public CartsDTO getCarts(int size, int page)
     {
-        WebResource.Builder resource = webResource.path(CARTS_PATH)
+        Response response = webResource.path(CARTS_PATH)
                 .queryParam("carts_size", Integer.toString(size))
-                .queryParam("carts_page", Integer.toString(page)).cookie(sessionId);
-        
-       return validateAndParseResponse(execute(HttpMethod.GET, resource), CartsDTO.class, 200);
+                .queryParam("carts_page", Integer.toString(page)).request().cookie(sessionId).get();
+
+        return validateAndParseResponse(response, CartsDTO.class, 200);
     }
 
     @Override
     public CartDTO getCart(String code) throws HybrisAPIException, HybrisClientException
     {
-        WebResource.Builder resource = webResource.path(CARTS_PATH).path(code).cookie(sessionId);
+        Response response = webResource.path(CARTS_PATH).path(code).request().cookie(sessionId)
+                .get();
 
-        return validateAndParseResponse(execute(HttpMethod.GET, resource), CartDTO.class, 200);
+        return validateAndParseResponse(response, CartDTO.class, 200);
     }
 
     @Override
     public void upsertCart(CartDTO cart) throws HybrisAPIException, HybrisClientException
     {
-        WebResource.Builder resource = webResource.path(CARTS_PATH).path(cart.getCode()).cookie(sessionId)
-                .type(MediaType.APPLICATION_XML).entity(cart);
-        
-        validateAndParseResponse(execute(HttpMethod.PUT, resource), String.class, 200, 201);
+        Response response = webResource.path(CARTS_PATH).path(cart.getCode()).request()
+                .cookie(sessionId).put(Entity.entity(cart, MediaType.APPLICATION_XML_TYPE));
+
+        validateAndParseResponse(response, String.class, 200, 201);
     }
 
     @Override
     public void deleteCart(String code) throws HybrisAPIException, HybrisClientException
     {
-        WebResource.Builder resource = webResource.path(CARTS_PATH).path(code).cookie(sessionId);
-        
-        validateAndParseResponse(execute(HttpMethod.DELETE, resource), String.class, 200);
+        Response response = webResource.path(CARTS_PATH).path(code).request().cookie(sessionId)
+                .delete();
+
+        validateAndParseResponse(response, String.class, 200);
     }
 
     @Override
     public CartEntriesDTO getCartEntries(int size, int page)
     {
-        WebResource.Builder resource = webResource.path(CART_ENTRIES_PATH)
+        Response response = webResource.path(CART_ENTRIES_PATH)
                 .queryParam("cartentries_size", Integer.toString(size))
-                .queryParam("cartentries_page", Integer.toString(page)).cookie(sessionId);
+                .queryParam("cartentries_page", Integer.toString(page)).request().cookie(sessionId)
+                .get();
 
-        return validateAndParseResponse(execute(HttpMethod.GET, resource), CartEntriesDTO.class, 200);
+        return validateAndParseResponse(response, CartEntriesDTO.class, 200);
     }
 
     @Override
     public CartEntryDTO getCartEntry(Long pk) throws HybrisAPIException, HybrisClientException
     {
-        WebResource.Builder resource = webResource.path(CART_ENTRIES_PATH).path(Long.toString(pk))
-                .cookie(sessionId);
+        Response response = webResource.path(CART_ENTRIES_PATH).path(Long.toString(pk)).request()
+                .cookie(sessionId).get();
 
-        return validateAndParseResponse(execute(HttpMethod.GET, resource), CartEntryDTO.class, 200);
+        return validateAndParseResponse(response, CartEntryDTO.class, 200);
     }
 
     @Override
     public void deleteCartEntry(Long pk) throws HybrisAPIException, HybrisClientException
     {
-        WebResource.Builder resource = webResource.path(CART_ENTRIES_PATH).path(Long.toString(pk)).cookie(sessionId);
-        
+        Response response = webResource.path(CART_ENTRIES_PATH).path(Long.toString(pk)).request()
+                .cookie(sessionId).delete();
 
-        validateAndParseResponse(execute(HttpMethod.DELETE, resource), String.class, 200);
+        validateAndParseResponse(response, String.class, 200);
     }
 
     @Override
-    public void upsertCartEntry(CartEntryDTO cartEntry) throws HybrisAPIException, HybrisClientException
+    public void upsertCartEntry(CartEntryDTO cartEntry) throws HybrisAPIException,
+            HybrisClientException
     {
-        WebResource.Builder resource = webResource.path(CART_ENTRIES_PATH).path(Long.toString(cartEntry.getPk()))
-                .cookie(sessionId).type(MediaType.APPLICATION_XML).entity(cartEntry);
-        
-        validateAndParseResponse(execute(HttpMethod.PUT, resource), String.class, 200, 201);
+        Response response = webResource.path(CART_ENTRIES_PATH)
+                .path(Long.toString(cartEntry.getPk())).request().cookie(sessionId)
+                .put(Entity.entity(cartEntry, MediaType.APPLICATION_XML_TYPE));
+
+        validateAndParseResponse(response, String.class, 200, 201);
     }
 
     @Override
     public PaymentModesDTO getPaymentModes(int size, int page)
     {
-        WebResource.Builder resource = webResource.path(PAYMENT_MODES_PATH)
+        Response response = webResource.path(PAYMENT_MODES_PATH)
                 .queryParam("paymentmodes_size", Integer.toString(size))
-                .queryParam("paymentmodes_page", Integer.toString(page)).cookie(sessionId);
+                .queryParam("paymentmodes_page", Integer.toString(page)).request()
+                .cookie(sessionId).get();
 
-        return validateAndParseResponse(execute(HttpMethod.GET, resource), PaymentModesDTO.class, 200);
+        return validateAndParseResponse(response, PaymentModesDTO.class, 200);
     }
 
     @Override
-    public PaymentModeDTO getPaymentMode(String code) throws HybrisAPIException, HybrisClientException
+    public PaymentModeDTO getPaymentMode(String code) throws HybrisAPIException,
+            HybrisClientException
     {
-        WebResource.Builder resource = webResource.path(PAYMENT_MODES_PATH).path(code).cookie(sessionId);
-        
-        return validateAndParseResponse(execute(HttpMethod.GET, resource), PaymentModeDTO.class, 200);
+        Response response = webResource.path(PAYMENT_MODES_PATH).path(code).request()
+                .cookie(sessionId).get();
+
+        return validateAndParseResponse(response, PaymentModeDTO.class, 200);
     }
 
     @Override
-    public void upsertPaymentMode(PaymentModeDTO paymentMode) throws HybrisAPIException, HybrisClientException
+    public void upsertPaymentMode(PaymentModeDTO paymentMode) throws HybrisAPIException,
+            HybrisClientException
     {
-        WebResource.Builder resource = webResource.path(PAYMENT_MODES_PATH).path(paymentMode.getCode()).cookie(sessionId)
-                .type(MediaType.APPLICATION_XML).entity(paymentMode);
-        
-        validateAndParseResponse(execute(HttpMethod.PUT, resource), String.class, 200, 201);
+        Response response = webResource.path(PAYMENT_MODES_PATH).path(paymentMode.getCode())
+                .request().cookie(sessionId)
+                .put(Entity.entity(paymentMode, MediaType.APPLICATION_XML_TYPE));
+
+        validateAndParseResponse(response, String.class, 200, 201);
     }
 
     @Override
     public void deletePaymentMode(String code) throws HybrisAPIException, HybrisClientException
     {
-        WebResource.Builder resource = webResource.path(PAYMENT_MODES_PATH).path(code).cookie(sessionId);
-        
-                validateAndParseResponse(execute(HttpMethod.DELETE, resource), String.class, 200);
+        Response response = webResource.path(PAYMENT_MODES_PATH).path(code).request()
+                .cookie(sessionId).delete();
+
+        validateAndParseResponse(response, String.class, 200);
     }
 
     @Override
     public CountriesDTO getCountries(int size, int page)
     {
-        WebResource.Builder resource = webResource.path(COUNTRIES_PATH)
+        Response response = webResource.path(COUNTRIES_PATH)
                 .queryParam("countries_size", Integer.toString(size))
-                .queryParam("countries_page", Integer.toString(page)).cookie(sessionId);
+                .queryParam("countries_page", Integer.toString(page)).request().cookie(sessionId)
+                .get();
 
-        return validateAndParseResponse(execute(HttpMethod.GET, resource), CountriesDTO.class, 200);
+        return validateAndParseResponse(response, CountriesDTO.class, 200);
     }
 
     @Override
     public CountryDTO getCountry(String isocode) throws HybrisAPIException, HybrisClientException
     {
-        WebResource.Builder resource = webResource.path(COUNTRIES_PATH).path(isocode).cookie(sessionId);
+        Response response = webResource.path(COUNTRIES_PATH).path(isocode).request()
+                .cookie(sessionId).get();
 
-        return validateAndParseResponse(execute(HttpMethod.GET, resource), CountryDTO.class, 200);
+        return validateAndParseResponse(response, CountryDTO.class, 200);
     }
 
     @Override
     public void upsertCountry(CountryDTO country) throws HybrisAPIException, HybrisClientException
     {
-        WebResource.Builder resource =  webResource.path(COUNTRIES_PATH).path(country.getIsocode()).cookie(sessionId)
-                .type(MediaType.APPLICATION_XML).entity(country);
-        
-        validateAndParseResponse(execute(HttpMethod.PUT, resource), String.class, 200, 201);
+        Response response = webResource.path(COUNTRIES_PATH).path(country.getIsocode()).request()
+                .cookie(sessionId).put(Entity.entity(country, MediaType.APPLICATION_XML_TYPE));
+
+        validateAndParseResponse(response, String.class, 200, 201);
     }
 
     @Override
     public void deleteCountry(String isocode) throws HybrisAPIException, HybrisClientException
     {
-        WebResource.Builder resource = webResource.path(COUNTRIES_PATH).path(isocode).cookie(sessionId);
+        Response response = webResource.path(COUNTRIES_PATH).path(isocode).request()
+                .cookie(sessionId).delete();
 
-        validateAndParseResponse(execute(HttpMethod.DELETE, resource), String.class, 200);
+        validateAndParseResponse(response, String.class, 200);
     }
 
     @Override
     public RegionsDTO getRegions(int size, int page)
     {
-        WebResource.Builder resource = webResource.path(REGIONS_PATH)
+        Response response = webResource.path(REGIONS_PATH)
                 .queryParam("regions_size", Integer.toString(size))
-                .queryParam("regions_page", Integer.toString(page)).cookie(sessionId);
-        
-        return validateAndParseResponse(execute(HttpMethod.GET, resource), RegionsDTO.class, 200);
+                .queryParam("regions_page", Integer.toString(page)).request().cookie(sessionId)
+                .get();
+
+        return validateAndParseResponse(response, RegionsDTO.class, 200);
     }
 
     @Override
     public RegionDTO getRegion(String isocode) throws HybrisAPIException, HybrisClientException
     {
-        WebResource.Builder resource = webResource.path(REGIONS_PATH).path(isocode).cookie(sessionId);
+        Response response = webResource.path(REGIONS_PATH).path(isocode).request()
+                .cookie(sessionId).get();
 
-        return validateAndParseResponse(execute(HttpMethod.GET, resource), RegionDTO.class, 200);
+        return validateAndParseResponse(response, RegionDTO.class, 200);
     }
 
     @Override
     public void upsertRegion(RegionDTO region) throws HybrisAPIException, HybrisClientException
     {
-        WebResource.Builder resource = webResource.path(REGIONS_PATH).path(region.getIsocode()).cookie(sessionId)
-                .type(MediaType.APPLICATION_XML).entity(region);
-        
-        validateAndParseResponse(execute(HttpMethod.PUT, resource), String.class, 200, 201);
+        Response response = webResource.path(REGIONS_PATH).path(region.getIsocode()).request()
+                .cookie(sessionId).put(Entity.entity(region, MediaType.APPLICATION_XML_TYPE));
+
+        validateAndParseResponse(response, String.class, 200, 201);
     }
 
     @Override
     public void deleteRegion(String isocode) throws HybrisAPIException, HybrisClientException
     {
-        WebResource.Builder resource = webResource.path(REGIONS_PATH).path(isocode).cookie(sessionId);
+        Response response = webResource.path(REGIONS_PATH).path(isocode).request()
+                .cookie(sessionId).delete();
 
-        validateAndParseResponse(execute(HttpMethod.DELETE, resource), String.class, 200);
+        validateAndParseResponse(response, String.class, 200);
     }
 
     @Override
     public LanguagesDTO getLanguages(int size, int page)
     {
-        WebResource.Builder resource = webResource.path(LANGUAGES_PATH)
+        Response response = webResource.path(LANGUAGES_PATH)
                 .queryParam("languages_size", Integer.toString(size))
-                .queryParam("languages_page", Integer.toString(page)).cookie(sessionId);
+                .queryParam("languages_page", Integer.toString(page)).request().cookie(sessionId)
+                .get();
 
-        return validateAndParseResponse(execute(HttpMethod.GET, resource), LanguagesDTO.class, 200);
+        return validateAndParseResponse(response, LanguagesDTO.class, 200);
     }
 
     @Override
     public LanguageDTO getLanguage(String isocode) throws HybrisAPIException, HybrisClientException
     {
-        WebResource.Builder resource = webResource.path(LANGUAGES_PATH).path(isocode).cookie(sessionId);
-        
-        return validateAndParseResponse(execute(HttpMethod.GET, resource), LanguageDTO.class, 200);
+        Response response = webResource.path(LANGUAGES_PATH).path(isocode).request()
+                .cookie(sessionId).get();
+
+        return validateAndParseResponse(response, LanguageDTO.class, 200);
     }
 
     @Override
-    public void upsertLanguage(LanguageDTO language) throws HybrisAPIException, HybrisClientException
+    public void upsertLanguage(LanguageDTO language) throws HybrisAPIException,
+            HybrisClientException
     {
-        WebResource.Builder resource = webResource.path(LANGUAGES_PATH).path(language.getIsocode()).cookie(sessionId)
-                .type(MediaType.APPLICATION_XML).entity(language);
+        Response response = webResource.path(LANGUAGES_PATH).path(language.getIsocode()).request()
+                .cookie(sessionId).put(Entity.entity(language, MediaType.APPLICATION_XML_TYPE));
 
-        validateAndParseResponse(execute(HttpMethod.PUT, resource), String.class, 200, 201);
+        validateAndParseResponse(response, String.class, 200, 201);
     }
 
     @Override
     public void deleteLanguage(String isocode) throws HybrisAPIException, HybrisClientException
     {
-        WebResource.Builder resource = webResource.path(LANGUAGES_PATH).path(isocode).cookie(sessionId);
-        
-        validateAndParseResponse(execute(HttpMethod.DELETE, resource), String.class, 200);
+        Response response = webResource.path(LANGUAGES_PATH).path(isocode).request()
+                .cookie(sessionId).delete();
+
+        validateAndParseResponse(response, String.class, 200);
     }
 }

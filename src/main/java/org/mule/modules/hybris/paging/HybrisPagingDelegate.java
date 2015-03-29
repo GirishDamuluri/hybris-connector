@@ -5,9 +5,11 @@ import java.util.Collections;
 import java.util.List;
 
 import org.mule.api.MuleException;
-import org.mule.streaming.PagingDelegate;
+import org.mule.modules.hybris.HybrisConnector;
+import org.mule.streaming.ProviderAwarePagingDelegate;
 
-public abstract class HybrisPagingDelegate<T> extends PagingDelegate<T>
+public abstract class HybrisPagingDelegate<T> extends
+        ProviderAwarePagingDelegate<T, HybrisConnector>
 {
 
     public int start = 0;
@@ -21,7 +23,7 @@ public abstract class HybrisPagingDelegate<T> extends PagingDelegate<T>
     }
 
     @Override
-    public List<T> getPage()
+    public List<T> getPage(HybrisConnector connector)
     {
         if (!this.firstExecution && this.start == 0)
         {
@@ -30,7 +32,7 @@ public abstract class HybrisPagingDelegate<T> extends PagingDelegate<T>
         try
         {
             this.firstExecution = false;
-            List<T> entries = this.doGetPage();
+            List<T> entries = this.doGetPage(connector);
             this.start += 1;
             return entries;
         } catch (IOException e)
@@ -39,10 +41,10 @@ public abstract class HybrisPagingDelegate<T> extends PagingDelegate<T>
         }
     }
 
-    protected abstract List<T> doGetPage() throws IOException;
+    protected abstract List<T> doGetPage(HybrisConnector connector) throws IOException;
 
     @Override
-    public int getTotalResults()
+    public int getTotalResults(HybrisConnector arg0) throws Exception
     {
         return -1;
     }

@@ -29,7 +29,7 @@ import org.mule.modules.hybris.model.UnitsDTO;
 
 public interface HybrisClient {
 	public void login(String username, String password) throws ConnectionException;
-	public void logout() throws ConnectionException;
+	public void logout();
 	public boolean isConnected();
 	public String connectionId();
 	
