@@ -34,7 +34,7 @@
 		<dependency>
 			<groupId>com.github.tomakehurst</groupId>
 			<artifactId>wiremock</artifactId>
-			<version>1.33</version>
+			<version>1.54</version>
 
 			<!-- Include this if you have dependency conflicts for Guava, Jetty, Jackson 
 				or Apache HTTP Client -->

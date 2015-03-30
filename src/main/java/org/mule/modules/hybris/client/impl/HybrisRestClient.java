@@ -10,7 +10,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.NewCookie;
 import javax.ws.rs.core.Response;
 
-import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.client.authentication.HttpAuthenticationFeature;
 import org.mule.api.ConnectionException;
 import org.mule.api.ConnectionExceptionCode;
@@ -73,15 +72,10 @@ public class HybrisRestClient implements HybrisClient
     @Override
     public void login(String username, String password) throws ConnectionException
     {
-        HttpAuthenticationFeature feature = HttpAuthenticationFeature.basic(username, password);
-
-        ClientConfig clientConfig = new ClientConfig();
-        clientConfig.register(feature);
-
-        this.client = ClientBuilder.newClient(clientConfig);
+        this.client = ClientBuilder.newClient();
 
         this.webResource = client.target(endpointUrl);
-        this.webResource.register(feature);
+        this.webResource.register(HttpAuthenticationFeature.basic(username, password));
 
         Response response = webResource.path(LOGIN_PATH).request().get(Response.class);
 
