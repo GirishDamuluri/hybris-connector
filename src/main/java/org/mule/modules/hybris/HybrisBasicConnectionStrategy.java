@@ -7,6 +7,7 @@ import org.mule.api.annotations.Disconnect;
 import org.mule.api.annotations.TestConnectivity;
 import org.mule.api.annotations.ValidateConnection;
 import org.mule.api.annotations.components.ConnectionManagement;
+import org.mule.api.annotations.display.Password;
 import org.mule.api.annotations.param.ConnectionKey;
 import org.mule.api.annotations.param.Default;
 import org.mule.modules.hybris.client.HybrisClient;
@@ -33,7 +34,7 @@ public class HybrisBasicConnectionStrategy
      */
     @Connect
     @TestConnectivity
-    public void connect(@ConnectionKey String username, String password,
+    public void connect(@ConnectionKey String username, @Password String password,
             @Default(value = "http://localhost:9001/ws410/rest") String endpointUrl)
             throws ConnectionException
     {
