@@ -34,7 +34,7 @@ public class HybrisBasicConnectionStrategy
     @Connect
     @TestConnectivity
     public void connect(@ConnectionKey String username, String password,
-            @Default(value = " http://localhost:9001/ws410/rest") String endpointUrl)
+            @Default(value = "http://localhost:9001/ws410/rest") String endpointUrl)
             throws ConnectionException
     {
         this.client = HybrisClientFactory.getClient(endpointUrl);
