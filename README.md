@@ -30,4 +30,4 @@ mvn install
 
 Testing
 =======
-This project contains test classes with test methods for each of the operations supported by the connector. It uses [WiremMock](http://wiremock.org/) to simulate the Hybris APIs for testing.
+This project contains test classes with test methods for each of the operations supported by the connector. It uses [WireMock](http://wiremock.org/) to simulate the Hybris APIs for testing.
