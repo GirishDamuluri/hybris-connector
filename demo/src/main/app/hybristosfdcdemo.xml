@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:sfdc="http://www.mulesoft.org/schema/mule/sfdc"
+	xmlns:hybris="http://www.mulesoft.org/schema/mule/hybris" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.6.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/hybris http://www.mulesoft.org/schema/mule/hybris/current/mule-hybris.xsd
+http://www.mulesoft.org/schema/mule/sfdc http://www.mulesoft.org/schema/mule/sfdc/current/mule-sfdc.xsd">
+	<hybris:config-type name="hybris__Basic_Auth_type_strategy"
+		username="${hybris.user}" password="${hybris.password}" doc:name="hybris: Basic Auth type strategy" />
+	<sfdc:config name="Salesforce" username="${sfdc.user}"
+		password="${sfdc.password}" securityToken="${sfdc.securityToken}"
+		doc:name="Salesforce" />
+	<flow name="hybristosfdcdemoFlow">
+		<poll doc:name="Poll">
+			<hybris:get-category config-ref="hybris__Basic_Auth_type_strategy"
+				catalogId="powertoolsProductCatalog" categoryCode="953" version="Online"
+				doc:name="hybris" />
+		</poll>
+		<foreach collection="#[payload.products.product]" doc:name="For Each">
+			<hybris:get-product config-ref="hybris__Basic_Auth_type_strategy"
+				catalogId="powertoolsProductCatalog" productCode="#[payload.code]"
+				version="Online" doc:name="hybris" />
+			<sfdc:upsert config-ref="Salesforce" externalIdFieldName="Id"
+				type="Product2" doc:name="Salesforce">
+				<sfdc:objects>
+					<sfdc:object>
+						<sfdc:inner-object key="Description">#[payload.description]
+						</sfdc:inner-object>
+						<sfdc:inner-object key="ProductCode">#[payload.code]
+						</sfdc:inner-object>
+						<sfdc:inner-object key="Name">#[payload.name]
+						</sfdc:inner-object>
+						<sfdc:inner-object key="IsActive">#[true]
+						</sfdc:inner-object>
+						<sfdc:inner-object key="Family">cat001
+						</sfdc:inner-object>
+					</sfdc:object>
+				</sfdc:objects>
+			</sfdc:upsert>
+		</foreach>
+		<logger message="Completed..." level="INFO" doc:name="Logger" />
+	</flow>
+</mule>
