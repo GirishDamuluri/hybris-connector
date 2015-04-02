@@ -33,7 +33,6 @@ git clone https://github.com/ryandcarter/hybris-connector
 cd hybris-connector
 mvn install
 ```
-
 Installing the Connector in Studio
 ==================================
 * First generate the Update site for the connector:
@@ -45,7 +44,7 @@ mvn clean package -Ddevkit.studio.package.skip=false
 * After the Install window opens, click Add, which is located to the right of the “Work
 with” field.
 * Enter a unique name of your choice for the update site in the Name field (for example,
-“Google Maps Connector”).
+“Hybris Connector”).
 * In the Location field, enter the full path to your connector, prefixed by file:/, and
 click OK.
 * A table will appear displaying the available connectors under “community” and
