@@ -8,7 +8,7 @@ Requirements
 * Minimum Mule version 3.6
 * Minimum Devkit version 3.6
 
-This conenctor makes use of 3.6 only features such as the new Connection Management/Stratgies.
+This conenctor makes use of 3.6 only features such as the new Connection Management/Strategies.
 
 Usage
 =====
