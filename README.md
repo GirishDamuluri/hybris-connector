@@ -10,6 +10,8 @@ Requirements
 
 This conenctor makes use of 3.6 only features such as the new Connection Management/Strategies.
 
+It also uses Jersey 2.x + depenednecies whih will conflict with Mule Jersey and Http dependencies prior to Mule 3.6.
+
 Usage
 =====
 You must be Hybris Customer or Partner to have access to a Hybris Installation and access the [Hybris Wiki](https://wiki.hybris.com/display/release5/WebService+API+-+Reference).
