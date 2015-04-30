@@ -1,0 +1,29 @@
+=== README.adoc Template
+
+----
+= Hybris Anypoint™ Connector
+ ---
+Anypoint™ Connector for Hybris Platform Web Services.
+
+== Author 
+Ryan Carter.
+
+== Supported Mule runtime versions
+
+Mule 3.6.x
+
+== Hybris supported versions
+
+Hybris v4 +
+
+== Service or application supported modules
+
+Hybris Platform Web Services API v4 +.
+
+== Installation 
+
+You can access the full documentation https://github.com/ryandcarter/hybris-connector.
+
+== Reporting Issues
+
+We use GitHub:Issues for tracking issues with this connector. You can report new issues at this link https://github.com/ryandcarter/hybris-connector/issues.

@@ -13,3 +13,7 @@ hybris.password=
 sfdc.user=
 sfdc.password=
 sfdc.securityToken=
+
+### Running:
+
+Run the application as normal and the application will automatically start polling Hybris and start inserting records into Salesforce.

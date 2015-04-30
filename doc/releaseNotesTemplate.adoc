@@ -1,0 +1,63 @@
+== References:
+
+. <System_Name>: Hybris
+
+. <System_Version>: 1
+
+. <Release_date>: 24-Apr-2015
+
+. <Connector_Version>: v1.0.0
+
+. <Connector_Guide_Url>: http://github.com/mulesoft/hybris-connector/
+
+. <Supported_Mule_Version>: Mule 3.6.x and higher.
+
+
+== Hybris Connector Release Notes
+=== <Release_date>
+
+=== Contents
+
+. Compatibility
+. Features
+. Fixed in this Release
+. Known Issues
+. Support Resources
+
+Release Notes for version <Connector_Version> of the <System_Name> connector. These Release Notes accompany the  <Connector_Guide_URL> guide.
+ 
+=== Compatibility
+The <System_name> connector is compatible with:
+
+|===
+|Application/Service|Version
+
+|Mule Runtime|<Supported_Mule_Version>
+|<System_Name>|<System_Version>
+|===
+
+=== Migrating from older versions of the connector:
+
+N/A
+
+
+=== Features
+
+. HMAC Authentication - Supports AUthenticating against the API using HMAC Authentication.
+
+. Get Segaments - Support Get Segments API operation.
+
+=== Fixed in this Release
+
+N/A
+
+=== Known Issues
+
+N/A
+
+=== Support Resources
+
+. Learn how to Install and Configure Anypoint Connectors in Anypoint Studio.
+. Access MuleSoft’s MuleForge forum to pose questions and get help from Mule’s broad community of users.
+. To access MuleSoft’s expert support team, subscribe to Mule ESB Enterprise and log in to MuleSoft’s Customer Portal.
+
