@@ -30,7 +30,6 @@ And a Video Screencast here: http://youtu.be/MB13CZKVRd4
 
 We use GitHub:Issues for tracking issues with this connector. You can report new issues at this link http://github.com/mulesoft/acquia-lift/issues.
 
-
 # Third-Party Code
 
 This project contains certain third-party code (including code which may be made available to you in source code form). Ownership, use, warranty and modification rights with respect to any such designated code is listed below.
